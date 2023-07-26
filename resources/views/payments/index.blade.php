@@ -42,78 +42,129 @@
                 <div class="card h-100">
                     <div class="nk-ecwg nk-ecwg6">
                         <div class="card-inner">
-                            <div class="card-title-group">
-                                <div class="card-title">
-                                    <h6 class="title">ECS Payment</h6>
+                            @if (auth()->user()->employees->count() > 0)
+                                <div class="card-title-group">
+                                    <div class="card-title">
+                                        <h6 class="title">ECS Payment</h6>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="data">
-                                <div class="data-group">
-                                    <div class="form-group">
-                                        @if (!$pending_payment)
-                                            <label for="">Payment due is:
-                                                <strong>&#8358;{{ number_format($payment_due, 2) }}</strong></label>
-                                            <div class="form-group">
-                                                <form method="POST" action="{{ route('payment.remita') }}">
-                                                    @csrf
-                                                    <input type="hidden" name="payment_type" id="payment_type"
-                                                        value="4">
-                                                    <input type="hidden" name="employee" id="employee"
-                                                        value="{{ $employees_count }}">
-                                                    <input type="hidden" name="amount" id="amount"
-                                                        value="{{ $payment_due }}">
-                                                    <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
-                                                            class="icon ni ni-save me-2"></em> Generate Invoice (Remita
-                                                        RR)</button>
-                                                </form>
-                                            </div>
-                                        @elseif($pending_payment->payment_status == 0)
-                                            <div class="form-group mt-2">
-                                                <div class="row">
-                                                    <div class="col-6 fw-bold">RRR:</div>
-                                                    <div class="col-6">{{ $pending_payment->rrr }}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 fw-bold">Invoice:</div>
-                                                    <div class="col-6">{{ $pending_payment->invoice_number }}</div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6 fw-bold">Amount:</div>
-                                                    <div class="col-6">
-                                                        &#8358;{{ number_format($pending_payment->amount, 2) }}</div>
-                                                </div>
-                                                <div>
-                                                    <form onsubmit="makePayment()" id="payment-form">
-                                                        <input type="hidden" class="form-control" id="js-rrr"
-                                                            name="rrr" value="{{ $pending_payment->rrr }}"
-                                                            placeholder="Enter RRR" />
-                                                        <button type="button" onclick="makePayment()"
-                                                            class="btn btn-primary btn-lg mt-2"><em
-                                                                class="icon ni ni-send me-2"></em> Click to pay online
-                                                            now!</button>
+                                <div class="data">
+                                    <div class="data-group">
+                                        <div class="form-group">
+                                            @if (!$pending_payment)
+                                                <label for="">Payment due is:
+                                                    <strong>&#8358;{{ number_format($payment_due, 2) }}</strong></label>
+                                                <div class="form-group">
+                                                    <form method="POST" action="{{ route('payment.remita') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="payment_type" id="payment_type"
+                                                            value="4">
+                                                        <input type="hidden" name="employee" id="employee"
+                                                            value="{{ $employees_count }}">
+                                                        <input type="hidden" name="amount" id="amount"
+                                                            value="{{ $payment_due }}">
+                                                        <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
+                                                                class="icon ni ni-save me-2"></em> Generate Invoice (Remita
+                                                            RR)</button>
                                                     </form>
                                                 </div>
-                                            </div>
-                                        @else
+                                            @elseif($pending_payment->payment_status == 0)
+                                                <div class="form-group mt-2">
+                                                    <div class="row">
+                                                        <div class="col-6 fw-bold">RRR:</div>
+                                                        <div class="col-6">{{ $pending_payment->rrr }}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6 fw-bold">Invoice:</div>
+                                                        <div class="col-6">{{ $pending_payment->invoice_number }}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6 fw-bold">Amount:</div>
+                                                        <div class="col-6">
+                                                            &#8358;{{ number_format($pending_payment->amount, 2) }}</div>
+                                                    </div>
+                                                    <div>
+                                                        <form onsubmit="makePayment()" id="payment-form">
+                                                            <input type="hidden" class="form-control" id="js-rrr"
+                                                                name="rrr" value="{{ $pending_payment->rrr }}"
+                                                                placeholder="Enter RRR" />
+                                                            <button type="button" onclick="makePayment()"
+                                                                class="btn btn-primary btn-lg mt-2"><em
+                                                                    class="icon ni ni-send me-2"></em> Click to pay online
+                                                                now!</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-12 my-2">
+                                                            <p>
+                                                                <label for="">Your ECS Payment for the year <span
+                                                                        class="fw-bold">{{ date('Y', strtotime($pending_payment->paid_at)) }}</span>
+                                                                    of <span
+                                                                        class="fw-bold">{{ $pending_payment->employees }}</span>
+                                                                    Employees with the amount <span
+                                                                        class="fw-bold">&#8358;{{ number_format($pending_payment->amount, 2) }}</span>
+                                                                    has been PAID!</label>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="card-title-group">
+                                    <div class="card-title">
+                                        <h6 class="title">Notice!</h6>
+                                    </div>
+                                </div>
+                                <div class="data">
+                                    <div class="data-group">
+                                        <div class="form-group">
+                                            <label for="">You have not added any employees!</label>
                                             <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-12 my-2">
-                                                        <p>
-                                                            <label for="">Your ECS Payment for the year <span
-                                                                    class="fw-bold">{{ date('Y', strtotime($pending_payment->paid_at)) }}</span>
-                                                                of <span
-                                                                    class="fw-bold">{{ $pending_payment->employees }}</span>
-                                                                Employees with the amount <span
-                                                                    class="fw-bold">&#8358;{{ number_format($pending_payment->amount, 2) }}</span>
-                                                                has been PAID!</label>
-                                                        </p>
+                                                <div class="toggle-wrap nk-block-tools-toggle">
+                                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                                        data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                                        <ul class="nk-block-tools g-3">
+                                                            <li>
+                                                                <div class="dropdown">
+                                                                    <a href="#" class="btn btn-primary"
+                                                                        data-bs-toggle="dropdown"><em
+                                                                            class="icon ni ni-user-add"></em> <span>Add New
+                                                                            Employee(s)</span></a>
+                                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                                        <ul class="link-list-opt no-bdr">
+                                                                            <li><a href="/employee/create"><em
+                                                                                        class="icon ni ni-file-plus"></em><span>Add
+                                                                                        New
+                                                                                        Employee</span></a></li>
+                                                                            <li><a
+                                                                                    href="{{ route('employee.createbulk') }}"><em
+                                                                                        class="icon ni ni-upload-cloud"></em><span>Upload
+                                                                                        Bulk
+                                                                                        Employees</span></a></li>
+                                                                            <li><a
+                                                                                    href="{{ Storage::url('employees.xlsx') }}"><em
+                                                                                        class="icon ni ni-download-cloud"></em><span>Bulk
+                                                                                        Employee
+                                                                                        Template</span></a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div><!-- .card-inner -->
                     </div><!-- .nk-ecwg -->
                 </div><!-- .card -->

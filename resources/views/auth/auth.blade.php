@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="nk-block-content text-center text-lg-left">
-                                        <p class="text-soft">&copy; 2023 {{env('APP_NAME')}}. All Rights Reserved.</p>
+                                        <p class="text-soft">Copyright © 2023 P2E Technologies. All Rights Reserved.</p>
                                     </div>
                                 </div>
                             </div>

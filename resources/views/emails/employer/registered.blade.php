@@ -97,7 +97,7 @@
                                             alt="logo"></a>
                                     <p
                                         style="font-size: 1.5rem; font-family: Nunito, sans-serif; font-weight: 700; line-height: 1.2; color: #364a63; padding-top: 12px;">
-                                        Nigerian Social Insurance Trust Fund<br />Employer Self
+                                        Nigeria Social Insurance Trust Fund<br />Employer Self
                                         Service Portal</p>
                                 </td>
                             </tr>
@@ -116,9 +116,9 @@
                                         the following features:
                                     <ul style="padding-left: 20px;">
                                         <li>View and update your employee records</li>
-                                        <li>Make payments for your benefits</li>
-                                        <li>File claims for benefits</li>
-                                        <li>Contact the NSITF with any questions</li>
+                                        <li>Make Contributions</li>
+                                        <li>File for Claims and Compensations</li>
+                                        <li>Contact Support</li>
                                     </ul>
                                     </p>
                                     <br/>
@@ -142,7 +142,7 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; padding:25px 20px 0;">
-                                    <p style="font-size: 13px;">Copyright © 2023 {{ env('APP_NAME') }}. All rights
+                                    <p style="font-size: 13px;">Copyright © 2023 P2E Technologies. All rights
                                         reserved.
                                         <br> {{-- Template Made By <a style="color: #0fac81; text-decoration:none;" href="https://themeforest.net/user/softnio/portfolio">Softnio</a>. --}}
                                     </p>

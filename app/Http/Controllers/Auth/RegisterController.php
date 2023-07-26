@@ -98,11 +98,17 @@ class RegisterController extends Controller
 
         if ($data['employer_status'] == "new") {
             $last_ecs = Employer::get()->last();
+
             if ($last_ecs) {
-                $ecs = $last_ecs['ecs_number'] + 1;
+                //if selected ecs belongs to another employer
+                do {
+                    $ecs = $last_ecs['ecs_number'] + 1;
+                    $employer_exists = Employer::where('ecs_number', $ecs)->get()->last();
+                } while ($employer_exists);
             } else {
                 $ecs = '1000000001';
             }
+
             $data['ecs_number'] = $ecs;
         }
 

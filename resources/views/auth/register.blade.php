@@ -23,7 +23,7 @@
                     </div>
                     <div class="nk-block-head">
                         <div class="nk-block-head-content">
-                            <h4 class="nk-block-title text-center">Nigerian Social Insurance Trust
+                            <h4 class="nk-block-title text-center">Nigeria Social Insurance Trust
                                 Fund<br />Employer Self Service Portal</h4>
                             {{-- <div class="nk-block-des">
                             <p>Create New Dashlite Account</p>
@@ -272,7 +272,7 @@
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control date-picker-alt"
                                                             id="cac_reg_year" name="cac_reg_year"
-                                                            placeholder="mm/dd/yyyy" data-date-format="yyyy-mm-dd"
+                                                            placeholder="yyy-mm-dd" data-date-format="yyyy-mm-dd"
                                                             required>
                                                     </div>
                                                 </div>
@@ -292,7 +292,7 @@
                                                         Address</label>
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control" id="company_address"
-                                                            name="company_address" placeholder="RC Number" required>
+                                                            name="company_address" placeholder="Company Address" required>
                                                     </div>
                                                 </div>
                                             </div>

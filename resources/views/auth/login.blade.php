@@ -21,7 +21,7 @@
                 </div>
                 <div class="nk-block-head">
                     <div class="nk-block-head-content">
-                        <h4 class="nk-block-title text-center">Nigerian Social Insurance Trust Fund<br />Employer Self
+                        <h4 class="nk-block-title text-center">Nigeria Social Insurance Trust Fund<br />Employer Self
                             Service Portal</h4>
                     </div>
                 </div>

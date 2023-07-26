@@ -30,13 +30,16 @@
                 </div>
                 <div class="nk-block-head mb-3">
                     <div class="nk-block-head-content">
-                        <h4 class="nk-block-title text-center">Nigerian Social Insurance Trust Fund<br />Employer Self
+                        <h4 class="nk-block-title text-center">Nigeria Social Insurance Trust Fund<br />Employer Self
                             Service Portal</h4>
                     </div>
                 </div>
+                @php
+                    $text = $payment->payment_status == 1 ? 'Receipt' : 'Invoice';
+                @endphp
                 <div class="invoice-head mx-3">
                     <div class="invoice-contact">
-                        <span class="overline-title">Invoice To</span>
+                        <span class="overline-title">{{$text}} To</span>
                         <div class="invoice-contact-info">
                             <h4 class="title">{{ auth()->user()->company_name }}</h4>
                             <ul class="list-plain">
@@ -49,12 +52,18 @@
                         </div>
                     </div>
                     <div class="invoice-desc">
-                        <h3 class="title">Invoice</h3>
+                        <h3 class="title">{{$text}}</h3>
                         <ul class="list-plain">
-                            <li class="invoice-id"><span>Invoice ID</span>:<span>{{ $payment->invoice_number }}</span>
+                            <li class="invoice-id"><span>{{$text}} ID</span>:<span>{{ $payment->invoice_number }}</span>
                             </li>
                             <li class="invoice-date">
                                 <span>Date</span>:<span>{{ date('d M, Y', strtotime($payment->invoice_generated_at)) }}</span>
+                            </li>
+                            <li class="invoice-date">
+                                <span>RRR</span>:<span>{{ $payment->rrr }}</span>
+                            </li>
+                            <li class="invoice-date">
+                                <span>Status</span>:<span>{{ $payment->payment_status == 1 ? 'PAID' : 'UNPAID' }}</span>
                             </li>
                         </ul>
                     </div>
