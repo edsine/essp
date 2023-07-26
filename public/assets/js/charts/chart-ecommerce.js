@@ -675,13 +675,13 @@
     }]
   };
   var orderStatistics = {
-    labels: ["Completed", "Canclled", "Processing"],
+    labels: ["Accident", "Disease", "Death"],
     dataUnit: 'Customer',
     legend: false,
     datasets: [{
       borderColor: "#fff",
-      background: ["#0fac81", "#e85347", "#816bff"],
-      data: [4305, 259, 682]
+      background: ["#0fac81", "#816bff", "#e85347"],
+      data: claims//[305, 259, 682]
     }]
   };
   function ecommerceDoughnutS1(selector, set_data) {

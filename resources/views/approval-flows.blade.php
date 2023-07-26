@@ -40,7 +40,7 @@
                                                 <div class="nk-block-head nk-block-head-lg">
                                                     <div class="nk-block-between">
                                                         <div class="nk-block-head-content">
-                                                            <h5 class="title fw-medium">Approval Types</h5>
+                                                            <h5 class="title fw-medium">Approval Flows</h5>
                                                             <span>These settings are helps youto add or manage user.</span>
                                                             <span class="text-success"><em class="icon ni ni-shield-check"></em></span>
                                                         </div><!-- .nk-block-head-content -->

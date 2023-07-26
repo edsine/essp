@@ -68,7 +68,7 @@
                                                             <h6 class="timeline-head">Details</h6>
 
                                                             <div class="row gy-4">
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <label class="form-label">Approval Type</label>
                                                                         <div class="form-control-wrap">
@@ -80,6 +80,8 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="col-md-4">
 
                                                                     <div class="form-group">
                                                                         <label class="form-label"
@@ -93,6 +95,8 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="col-md-4">
 
                                                                     <div class="form-group">
                                                                         <label for=""
@@ -113,7 +117,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <label class="form-label">Zone</label>
                                                                         <div class="form-control-wrap">
@@ -124,7 +128,8 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-
+                                                                </div>
+                                                                <div class="col-md-4">
 
                                                                     <div class="form-group">
                                                                         <label class="form-label">Branch</label>
@@ -137,6 +142,9 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
+
+                                                                </div>
+                                                                <div class="col-md-4">
 
                                                                     <div class="form-group">
                                                                         <label class="form-label">Department</label>
@@ -281,18 +289,14 @@
                                                                                                         class="form-select js-select2"
                                                                                                         multiple="multiple"
                                                                                                         data-placeholder="Select Role(s)">
-                                                                                                        <option>Backend
-                                                                                                            Developer
+                                                                                                        <option>Head of Unit
                                                                                                         </option>
-                                                                                                        <option>Frontend
-                                                                                                            Developer
+                                                                                                        <option>Head of Department
                                                                                                         </option>
                                                                                                         <option>
-                                                                                                            Fullstack
-                                                                                                            Developer
+                                                                                                            Human Resource
                                                                                                         </option>
-                                                                                                        <option>Mobile
-                                                                                                            Developer
+                                                                                                        <option>Manager
                                                                                                         </option>
                                                                                                     </select>
                                                                                                 </div>
@@ -325,7 +329,8 @@
                                                                     </table>
                                                                 </div>
                                                                 <div class="col mt-0">
-                                                                    <a href="#" class="btn btn-primary mt-0"><em class="icon ni ni-plus-sm"></em></a>
+                                                                    <a href="#" class="btn btn-primary mt-0"><em
+                                                                            class="icon ni ni-plus-sm"></em></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -333,7 +338,8 @@
                                                     <div class="card-inner border-top">
                                                         <div class="row gy-4">
                                                             <div class="col">
-                                                                <a href="/approval/flows" class="btn btn-primary mt-2">Create
+                                                                <a href="/approval/flows"
+                                                                    class="btn btn-primary mt-2">Create
                                                                     Approval
                                                                     Flow</a>
                                                             </div>

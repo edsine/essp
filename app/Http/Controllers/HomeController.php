@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $metrics = [
+            'employees' => auth()->user()->employees()->count(),
+            'accident_claims' => ['amount' => 0, 'number'=> auth()->user()->accident_claims()->count()],
+            'death_claims' => ['amount' => 0, 'number'=> auth()->user()->death_claims()->count()],
+            'disease_claims' => ['amount' => 0, 'number'=> auth()->user()->disease_claims()->count()],
+        ];
+        return view('home', compact(['metrics']));
     }
 }

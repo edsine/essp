@@ -68,20 +68,20 @@
                                                             <h6 class="timeline-head">Department (ICT)</h6>
                                                             <ul class="timeline-list">
                                                                 <li class="timeline-item">
-                                                                    <div class="timeline-status bg-info is-outline">
+                                                                    <div class="timeline-status bg-teal is-outline">
                                                                     </div>
                                                                     <div class="timeline-date">Step 1 {{-- <em
                                                                             class="icon ni ni-alarm-alt"></em> --}}</div>
                                                                     <div class="timeline-data">
                                                                         <h6 class="timeline-title">[All Users]</h6>
                                                                         <div class="timeline-des">
-                                                                            <p><span class="badge bg-outline-secondary">Create</span></p>
+                                                                            <p><span class="badge bg-outline-success">Create</span></p>
                                                                             <span class="time">09:30am</span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
                                                                 <li class="timeline-item">
-                                                                    <div class="timeline-status bg-teal is-outline"></div>
+                                                                    <div class="timeline-status bg-primary is-outline"></div>
                                                                     <div class="timeline-date">Step 2 <em
                                                                             class="icon ni ni-alarm-alt"></em></div>
                                                                     <div class="timeline-data">

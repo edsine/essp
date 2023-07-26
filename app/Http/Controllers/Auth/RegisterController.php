@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EmployerRegisteredMail;
+use App\Models\Branch;
+use App\Models\State;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
+use App\Models\Employer;
+use App\Notifications\EmployerRegistrationNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -50,9 +55,32 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'branch_id' => ['required'],
+            'contact_surname' => ['required', 'string', 'max:255'],
+            'contact_firstname' => ['required', 'string', 'max:255'],
+            'contact_middlename' => ['required', 'string', 'max:255'],
+            'contact_position' => ['required', 'string', 'max:255'],
+            'company_phone' => ['required', 'string', 'max:255'],
+            'contact_number' => ['required', 'string', 'max:255'],
+
+            'company_state' => ['required', 'string', 'max:255'],
+            'company_localgovt' => ['required', 'string', 'max:255'],
+            'company_name' => ['required', 'string', 'max:255'],
+
+            //'company_name' => ['required', 'string', 'max:255'],
+
+            'business_area' => ['required', 'string', 'max:255'],
+
+            'company_rcnumber' => ['required', 'string', 'max:255'],
+            'cac_reg_year' => ['required', 'date', 'max:255'],
+
+            'company_address' => ['required', 'string'],
+
+            'company_email' => ['required', 'string', 'email', 'max:255',], // 'unique:employers'],
+
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+            'certificate_of_incorporation' => ['required', 'file', 'mimes:pdf'],
         ]);
     }
 
@@ -60,14 +88,39 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return \App\Models\Employer
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        unset($data['password_confirmation']);
+        $data['user_id'] = 1;
+        $data['password'] = Hash::make($data['password']);
+
+        if ($data['employer_status'] == "new") {
+            $last_ecs = Employer::get()->last();
+            if ($last_ecs) {
+                $ecs = $last_ecs['ecs_number'] + 1;
+            } else {
+                $ecs = '1000000001';
+            }
+            $data['ecs_number'] = $ecs;
+        }
+
+        $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
+
+        //send notification
+        //$employer->notify(new EmployerRegistrationNotification($employer));
+        Mail::to($employer)->send(new EmployerRegisteredMail($employer));
+
+        return $employer;
+    }
+
+
+    public function showRegistrationForm()
+    {
+        //$region = Region::all();
+        $branches = Branch::all();
+        $states = State::all();
+        return view('auth.register', compact('branches', 'states'));
     }
 }
