@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * PAYMENTS
      */
+    Route::get('payment/invoice/download/{payment}', [App\Http\Controllers\PaymentController::class, 'download'])->name('payment.invoice.download');
     Route::get('payment/invoice/{payment}', [App\Http\Controllers\PaymentController::class, 'invoice'])->name('payment.invoice');
     Route::get('payment/remita', [App\Http\Controllers\PaymentController::class, 'callbackRemita'])->name('payment.callback');
     Route::post('payment/remita', [App\Http\Controllers\PaymentController::class, 'generateRemita'])->name('payment.remita');
@@ -71,20 +73,61 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/notification', function () {
-    $employer = App\Models\Employer::find(26083);
-    //email
+    ///$employer = App\Models\Employer::find(26083);
+    $payment = App\Models\Payment::get()->last();
+    $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
+        ->loadView('payments.invoice', ['pid' => $payment->id])
+        ->setPaper('a4', 'portrait');//email
 
     //use from inside code
     //return (new App\Mail\EmployerRegisteredMail($employer))->render();
 
     //send for testing
-    Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\EmployerRegisteredMail($employer));
+    ///Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\EmployerRegisteredMail($employer));
+    $content = $pdf->download()->getOriginalContent();
+    Illuminate\Support\Facades\Storage::put('public/invoices/invoice_' . $payment->id . '.pdf',$content);
+    Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\PaymentStatusMail($payment));
+    Illuminate\Support\Facades\Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
 
     //use for browser render outside codeblock
-    return new App\Mail\EmployerRegisteredMail($employer);
+    ///return new App\Mail\EmployerRegisteredMail($employer);
+    return new App\Mail\PaymentStatusMail($payment);
 
     //notification
     /* return (new App\Notifications\EmployerRegistrationNotification
     ($employer))->toMail($employer); */
     //$employer->notify(new EmployerRegistrationNotification($employer));
+});
+
+Route::get('/pdf', function () {
+    $payment = App\Models\Payment::get()->last();
+
+    $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
+        ->loadView('payments.invoice', ['pid' => $payment->id])
+        ->setPaper('a4', 'portrait')
+        //->set_option('isHtml5ParserEnabled', true)
+        //->set_option('isRemoteEnabled', true)
+        //->setWarnings(false)
+    ;
+
+    /* $pdf->getDomPDF()->setHttpContext(
+        stream_context_create([
+            'ssl' => [
+                'allow_self_signed' => TRUE,
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+            ]
+        ])
+    ); */
+
+    //download pdf
+    //return $pdf->download('invoice.pdf');
+
+    //save to storage
+    //$content = $pdf->download()->getOriginalContent();
+    //Illuminate\Support\Facades\Storage::put('public/invoices/invoice_' . $payment->id . '.pdf',$content);
+
+    //display pdf in browser without downlod
+    $pdf->render();
+    return $pdf->stream('invoice.pdf');
 });

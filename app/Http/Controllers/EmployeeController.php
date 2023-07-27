@@ -18,7 +18,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::get();
+        $employees = auth()->user()->employees;
 
         return view('employees.index', compact('employees'));
     }

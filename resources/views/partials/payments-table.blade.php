@@ -29,12 +29,16 @@
                                 class="tb-status text-warning">{{ $payment->approval_status == 0 ? 'Awaiting Approval' : '' }}</span>
                         </td>
                         <td>
-                            @if ($payment->payment_status != 1)
-                            <a href="/approval/request/timeline" title="Verify Status"><span class="nk-menu-icon text-info"><em
+                            {{-- @if ($payment->payment_status != 1)
+                            <a href="" title="Verify Status"><span class="nk-menu-icon text-info"><em
                                 class="icon ni ni-reload"></em></span></a>
-                            @endif
+                            @endif --}}
                             <a href="{{ route('payment.invoice', $payment->id) }}" target="_blank" title="Print"><span
                                     class="nk-menu-icon text-secondary"><em class="icon ni ni-printer"></em></span></a>
+                            @if($payment->payment_status == 1)
+                            <a href="{{ route('payment.invoice.download', $payment->id) }}" target="_blank" title="Download Receipt"><span
+                                    class="nk-menu-icon text-secondary"><em class="icon ni ni-download text-teal"></em></span></a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

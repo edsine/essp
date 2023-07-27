@@ -676,7 +676,7 @@
   };
   var orderStatistics = {
     labels: ["Accident", "Disease", "Death"],
-    dataUnit: 'Customer',
+    dataUnit: 'Employee',
     legend: false,
     datasets: [{
       borderColor: "#fff",

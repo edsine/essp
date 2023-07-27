@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
+use App\Mail\PaymentStatusMail;
 use App\Models\Employee;
 use App\Models\Employer;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
@@ -17,7 +21,7 @@ class PaymentController extends Controller
     public function index()
     {
         //get total employees for this employer
-        $employees_count = Employee::count();
+        $employees_count = auth()->user()->employees->count();
 
         //get total payments for this year
         $year_total_payment = auth()->user()->payments()
@@ -228,7 +232,7 @@ class PaymentController extends Controller
 
             //if already processed
             if ($payment->payment_status == 1) {
-                return redirect()->back()->with('info', 'Payment already processed!');
+                return redirect()->route('payment.index')->with('info', 'Payment already processed!');
             }
 
             //update payments
@@ -239,34 +243,61 @@ class PaymentController extends Controller
 
             if ($payment->payment_type == 1) {
                 //update employer
-                $employer = Employer::where('id', $payment->employer_id)->first();
-                $employer->paid_registration = 1;
-                $employer->save();
+                //$employer = Employer::where('id', $payment->employer_id)->first();
+                $payment->employer->paid_registration = 1;
+                $payment->employer->save();
             }
 
             if ($payment->payment_type == 2) {
                 auth()->user()->certificates()->where('payment_id', $payment->id)->update(['payment_status' => 1]);
             }
 
-            return redirect()->back()->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'ECS Payment successful!');
+            //generate invoice pdf
+            $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans'])
+                //->loadView('emails.payment.status', ['pid' => $payment->id])
+                ->loadView('payments.invoice', ['pid' => $payment->id])
+                ->setPaper('a4', 'portrait');
+
+            $content = $pdf->download()->getOriginalContent();
+
+            //$pdf->save(Storage::path('/invoices/invoice_' . $payment->id . '.pdf'))->stream('invoice_' . $payment->id . '.pdf');
+            Storage::put('public/invoices/invoice_' . $payment->id . '.pdf', $content);
+
+            //send mail with invoice notification
+            Mail::to($payment->employer->company_email)->send(new PaymentStatusMail($payment));
+
+            Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
+
+            return redirect()->route('payment.index')->with('success', $payment->payment_type == 1 ? 'Registration Payment successful!' : 'ECS Payment successful!');
         } else { //if payment was not successful
             //get and update transaction
             $payment = Payment::where('rrr', $request->ref)->first();
 
             //if already processed
             if ($payment->payment_status == 1)
-                return redirect()->back()->with('info', 'Payment already processed!');
+                return redirect()->route('payment.index')->with('info', 'Payment already processed!');
 
             //update payments
             $payment->payment_status = 2;
             $payment->save();
 
-            return redirect()->back()->with('info', $result['responseMsg']);
+            return redirect()->route('payment.index')->with('info', $result['responseMsg']);
         }
     }
 
     public function invoice(Request $request, Payment $payment)
     {
         return view('payments.invoice', compact('payment'));
+    }
+
+
+
+    public function download(Request $request, Payment $payment)
+    {
+        $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
+        ->loadView('payments.invoice', ['pid' => $payment->id])
+        ->setPaper('a4', 'portrait');
+
+        return $pdf->download('invoice.pdf');
     }
 }
