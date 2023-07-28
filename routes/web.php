@@ -73,25 +73,27 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/notification', function () {
-    ///$employer = App\Models\Employer::find(26083);
-    $payment = App\Models\Payment::get()->last();
+    $employer = App\Models\Employer::find(26083);
+    /* $payment = App\Models\Payment::get()->last();
     $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
         ->loadView('payments.invoice', ['pid' => $payment->id])
-        ->setPaper('a4', 'portrait');//email
+        ->setPaper('a4', 'portrait');//email */
+
+    $password = "password";
 
     //use from inside code
     //return (new App\Mail\EmployerRegisteredMail($employer))->render();
 
     //send for testing
-    ///Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\EmployerRegisteredMail($employer));
-    $content = $pdf->download()->getOriginalContent();
+    ///Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\EmployerRegisteredMail($employer, $password));
+    /* $content = $pdf->download()->getOriginalContent();
     Illuminate\Support\Facades\Storage::put('public/invoices/invoice_' . $payment->id . '.pdf',$content);
     Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\PaymentStatusMail($payment));
-    Illuminate\Support\Facades\Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf');
+    Illuminate\Support\Facades\Storage::delete('public/invoices/invoice_' . $payment->id . '.pdf'); */
 
     //use for browser render outside codeblock
-    ///return new App\Mail\EmployerRegisteredMail($employer);
-    return new App\Mail\PaymentStatusMail($payment);
+    return new App\Mail\EmployerRegisteredMail($employer, $password);
+    ///return new App\Mail\PaymentStatusMail($payment);
 
     //notification
     /* return (new App\Notifications\EmployerRegistrationNotification

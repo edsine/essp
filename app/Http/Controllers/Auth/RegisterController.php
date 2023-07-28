@@ -117,7 +117,7 @@ class RegisterController extends Controller
         //send notification
         //$employer->notify(new EmployerRegistrationNotification($employer));
         //send email
-        Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer));
+        Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $data['password']));
 
         return $employer;
     }

@@ -110,8 +110,15 @@
                                     <p style="margin-bottom: 10px;">Hi {{ $employer->company_name }},</p>
                                     <p style="margin-bottom: 10px;">Welcome to the NSITF Employee Self-Service Portal!
                                     </p>
-                                    <p style="margin-bottom: 10px;">We are pleased to have you on board. Your account is now verified and ready for use. You
-                                        can proceed now to <a style="color: #0fac81; text-decoration:none;" target="_blank" href="https://essp.nsitf.gov.ng">log in here</a>.</p>
+                                    <p style="margin-bottom: 10px;">We are pleased to have you on board. Your account is
+                                        now verified and ready for use. You
+                                        can proceed now to <a style="color: #0fac81; text-decoration:none;"
+                                            target="_blank" href="https://essp.nsitf.gov.ng">log in here</a> with
+                                        credentials below.</p>
+                                    <p style="margin-bottom: 10px;">
+                                        Username: {{ $employer->company_email }} <b>[OR]</b> {{ $employer->ecs_number }}<br>
+                                        Password: {{ $password }}
+                                    </p>
                                     <p style="margin-bottom: 10px;">Once you are logged in, you will be able to access
                                         the following features:
                                     <ul style="padding-left: 20px;">
@@ -121,18 +128,18 @@
                                         <li>Contact Support</li>
                                     </ul>
                                     </p>
-                                    <br/>
+                                    <br />
                                     <p style="margin-bottom: 15px;">We hope you find the portal to be a convenient and
                                         easy-to-use resource. If you have any questions, please do not hesitate to
                                         contact us at <a style="color: #0fac81; text-decoration:none;"
                                             href="mailto:info@nsitf.gov.ng">info@nsitf.gov.ng</a>, or visit our website
                                         at <a style="color: #0fac81; text-decoration:none;" target="_blank"
                                             href="https://nsitf.gov.ng">www.nsitf.gov.ng</a> anytime. </p>
-                                    <p></p><br/>
+                                    <p></p><br />
 
                                     <p>
-                                        Sincerely,<br/>
-                                        {{env('APP_NAME')}} Team
+                                        Sincerely,<br />
+                                        {{ env('APP_NAME') }} Team
                                     </p>
                                 </td>
                             </tr>
