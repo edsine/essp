@@ -65,7 +65,12 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            const lga = {{ $employee->local_govt_area ?? '' }};
+            function isInt(value) {
+  return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))
+}
+
+            let lga = '{{ $employee->local_govt_area ?? '' }}';
+            lga = isInt(lga) ? lga : 1;
             //FETCH LGAs FROM STATE ID
             const lUrl = "{{ route('employer.lgas') }}?state=";
             $('#state_of_origin').change(function() {

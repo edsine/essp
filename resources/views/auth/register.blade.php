@@ -154,6 +154,7 @@
                                                         <select class="form-select js-select2" id="branch_id"
                                                             name="branch_id" data-placeholder="Select Branch"
                                                             data-search="on" required>
+                                                            <option value=""></option>
                                                             @foreach ($branches as $branch)
                                                                 <option value="{{ $branch->id ?? $branch->branch_id }}">
                                                                     {{ $branch->branch_name }}</option>
@@ -247,9 +248,11 @@
                                                         <select class="form-select js-select2" id="business_area"
                                                             name="business_area" data-placeholder="Select Type" required>
                                                             <option value="">Select Type</option>
-                                                            <option value="Public / Private Limited Company">Public / Private Limited
+                                                            <option value="Public / Private Limited Company">Public /
+                                                                Private Limited
                                                                 Company</option>
-                                                            <option value="Informal Sector Employer">Informal Sector Employer</option>
+                                                            <option value="Informal Sector Employer">Informal Sector
+                                                                Employer</option>
                                                             <option value="Partnership">Partnership</option>
                                                             <option value="Sole Proprietor">Sole Proprietor</option>
                                                         </select>
@@ -272,7 +275,7 @@
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control date-picker-alt"
                                                             id="cac_reg_year" name="cac_reg_year"
-                                                            placeholder="yyy-mm-dd" data-date-format="yyyy-mm-dd"
+                                                            placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd"
                                                             required>
                                                     </div>
                                                 </div>
@@ -302,6 +305,7 @@
                                                         <select class="form-select js-select2" id="company_state"
                                                             name="company_state" data-placeholder="Select Company State"
                                                             data-search="on" required>
+                                                            <option value=""></option>
                                                             @foreach ($states as $state)
                                                                 <option value="{{ $state->id }}">{{ $state->name }}
                                                                 </option>
@@ -316,6 +320,7 @@
                                                         <select class="form-select js-select2" id="company_localgovt"
                                                             name="company_localgovt" data-placeholder="Select Company LGA"
                                                             data-search="on" required>
+                                                            <option value=""></option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -328,10 +333,12 @@
                                         <div class="row g-3">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label class="form-label" for="certificate_of_incorporation">Certification of
+                                                    <label class="form-label"
+                                                        for="certificate_of_incorporation">Certification of
                                                         Incorporation <span class="text-danger">(PDF only)*</span></label>
                                                     <div class="form-control-wrap">
-                                                        <input type="file" class="form-control" id="certificate_of_incorporation"
+                                                        <input type="file" class="form-control"
+                                                            id="certificate_of_incorporation"
                                                             name="certificate_of_incorporation"
                                                             placeholder="Certificate of Incorporation" accept=".pdf"
                                                             required>
@@ -2777,6 +2784,8 @@
         }
 
         $(document).ready(function() {
+            let lga_holder = '';
+
             //IF OLD OR NEW EMPLOYERR
             $('input[name="employer_status"]').change(function() {
                 console.log($(this).val)
@@ -2801,9 +2810,10 @@
                     $('#company_localgovt').empty();
                     var lgas = '';
                     $.each(response.data, function(a, b) {
-                        lgas += '<option value="' + b.id + '">' + b.name + '</option>';
+                        lgas += '<option value="' + b.id + '" '+(b.id=lga_holder ? 'selected':'')+'>' + b.name + '</option>';
                     });
                     $('#company_localgovt').html(lgas);
+                    $('#company_localgovt').trigger('change');
                 });
             });
 
@@ -2840,6 +2850,7 @@
                     if (response.status == 'success') {
                         // Pre-fill the form fields with the retrieved data
                         $('#branch_id').val(data.branch_id);
+                        $('#branch_id').trigger('change');
                         $('#contact_surname').val(data.contact_surname).prop('readonly', false)
                             .focus();
                         $('#contact_firstname').val(data.contact_firstname).prop('readonly', false)
@@ -2850,17 +2861,21 @@
                             .focus();
                         $('#company_phone').val(data.company_phone).prop('readonly', false).focus();
                         $('#contact_number').val(data.contact_number).prop('readonly', false)
-                        .focus();
+                            .focus();
                         $('#company_name').val(data.company_name).prop('readonly', true).focus();
                         $('#business_area').val(data.business_area);
+                        $('#business_area').trigger('change');
                         $('#company_rcnumber').val(data.company_rcnumber).prop('readonly', true)
                             .focus();
                         //$('#cac_reg_year').val(new Date(cac_reg_year).toLocaleDateString('en-US')).focus();
                         $('#cac_reg_year').val(data.cac_reg_year); //.focus();
                         //$('#cac_reg_year').datepicker({defaultDate: new Date (queryDate)});
                         $('#company_email').val(data.company_email).prop('readonly', true).focus();
+                        $('#company_localgovt').val(data.company_localgovt).prop(
+                            'readonly', false);
+                            lga_holder = data.company_localgovt;
                         $('#company_state').val(data.company_state).prop('readonly', false);
-                        $('#company_localgovt').val(data.company_localgovt).prop('readonly', false);
+                        $('#company_state').trigger('change');
                         $('#company_address').val(data.company_address).prop('readonly', false);
                         $('#employer_id').val(data.id);
                         /*

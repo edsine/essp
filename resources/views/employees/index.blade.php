@@ -74,19 +74,22 @@
                                         class="tb-status text-{{ $employee->status == 1 ? 'success' : 'danger' }}">{{ $employee->status == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}</span>
                                 </td>
                                 <td>
-                                    <a href="{{ route('employee.edit', $employee->id) }}"><span
+                                    <a href="{{ route('employee.edit', $employee->id) }}" title="Edit Employee"><span
                                             class="nk-menu-icon text-info"><em class="icon ni ni-edit"></em></span></a>
                                     {{-- <a data-id="{{ $employee->id }}"><span class="nk-menu-icon text-danger eg-swal-av3"><em
                                                 class="icon ni ni-trash"></em></span>
                                             </a> --}}
 
+                                    <a id="delete-employee" title="Terminate Employee" style="cursor: pointer;"
+                                        onclick="event.preventDefault();
+                                    document.getElementById('delete-employee-form').submit();"><span
+                                            class="nk-menu-icon text-danger eg-swal-av3"><em
+                                                class="icon ni ni-user-remove"></em></span>
+                                    </a>
                                     <form id="delete-employee-form" action="{{ route('employee.destroy', $employee->id) }}"
                                         method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <a id="delete-employee"><span class="nk-menu-icon text-danger eg-swal-av3"><em
-                                                    class="icon ni ni-trash"></em></span>
-                                        </a>
                                         {{-- <button onclick="return false" id="delete-employee"
                                             class="btn btn-danger">Delete</button> --}}
                                     </form>

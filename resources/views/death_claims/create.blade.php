@@ -68,7 +68,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-user"></em>
+                                            <em class="icon ni ni-sign-kobo"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="monthly_contribution" name="monthly_contribution" value="{{old('monthly_contribution')}}">
@@ -124,7 +124,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-user"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -138,7 +138,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-cc-alt"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -152,7 +152,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-building"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -166,7 +166,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-hash"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -187,7 +187,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-user"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -201,7 +201,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-cc-alt"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -215,7 +215,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-building"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"
@@ -229,7 +229,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-mobile"></em>
+                                                    <em class="icon ni ni-hash"></em>
                                                 </div>
                                                 <input type="text"
                                                     class="form-control form-control-xl form-control-outlined"

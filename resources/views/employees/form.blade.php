@@ -170,7 +170,7 @@
             <div class="form-group">
                 <div class="form-control-wrap">
                     <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-home"></em>
+                        <em class="icon ni ni-cc-alt"></em>
                     </div>
                     <input type="text" class="form-control form-control-xl form-control-outlined"
                         id="identity_number" name="identity_number" value="{{old('identity_number', $employee->identity_number ?? '' ?? '')}}">
@@ -200,7 +200,7 @@
             <div class="form-group">
                 <div class="form-control-wrap">
                     <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-mobile"></em>
+                        <em class="icon ni ni-cc-alt"></em>
                     </div>
                     <input type="text" class="form-control form-control-xl form-control-outlined"
                         id="staff_id" name="staff_id" value="{{old('staff_id', $employee->staff_id ?? '')}}">
@@ -226,7 +226,7 @@
             <div class="form-group">
                 <div class="form-control-wrap">
                     <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-mobile"></em>
+                        <em class="icon ni ni-briefcase"></em>
                     </div>
                     <input type="text" class="form-control form-control-xl form-control-outlined"
                         id="job_title" name="job_title" value="{{old('job_title', $employee->job_title ?? '')}}">
@@ -238,7 +238,7 @@
             <div class="form-group">
                 <div class="form-control-wrap">
                     <div class="form-icon form-icon-right">
-                        <em class="icon ni ni-mobile"></em>
+                        <em class="icon ni ni-sign-kobo"></em>
                     </div>
                     <input type="number" class="form-control form-control-xl form-control-outlined"
                         id="monthly_remuneration" name="monthly_remuneration" value="{{old('monthly_remuneration', $employee->monthly_remuneration ?? '')}}">

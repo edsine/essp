@@ -85,7 +85,7 @@ Route::get('/notification', function () {
     //return (new App\Mail\EmployerRegisteredMail($employer))->render();
 
     //send for testing
-    ///Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\EmployerRegisteredMail($employer, $password));
+    Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\EmployerRegisteredMail($employer, $password));
     /* $content = $pdf->download()->getOriginalContent();
     Illuminate\Support\Facades\Storage::put('public/invoices/invoice_' . $payment->id . '.pdf',$content);
     Illuminate\Support\Facades\Mail::to('realbenten@gmail.com')->send(new App\Mail\PaymentStatusMail($payment));

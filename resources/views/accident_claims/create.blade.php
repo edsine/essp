@@ -152,7 +152,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-sign-kobo"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="employee_earning" name="employee_earning"
@@ -245,7 +245,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-user"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="medical_last_name" name="medical_last_name"
@@ -258,7 +258,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-user"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="medical_first_name" name="medical_first_name"
@@ -271,7 +271,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-cc-alt"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="medical_practice_number" name="medical_practice_number"

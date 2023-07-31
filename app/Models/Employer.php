@@ -90,11 +90,13 @@ class Employer extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
-    public function state(){
+    public function state()
+    {
         return $this->belongsTo(State::class, 'company_state', 'id');
     }
 
-    public function lga(){
+    public function lga()
+    {
         return $this->belongsTo(LGA::class, 'company_localgovt', 'id');
     }
 }

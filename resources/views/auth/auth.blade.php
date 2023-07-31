@@ -4,15 +4,15 @@
 <head>
     <base href="../../../">
     <meta charset="utf-8">
-    <meta name="author" content="Softnio">
+    <meta name="author" content="PGL - Ben Onabe">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Nigerian Social Insurance Trust Fund (NSITF), Employer Self Service Portal (ESSP).">
 
-     <!-- CSRF Token -->
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="./images/favicon.png">
+    <link rel="shortcut icon" href="./assets/images/NSITF-logo.png">
     <!-- Page Title  -->
     <title>@yield('title') | {{env('APP_NAME')}}</title>
     <!-- StyleSheets  -->

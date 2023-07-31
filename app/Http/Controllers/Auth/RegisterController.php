@@ -112,6 +112,11 @@ class RegisterController extends Controller
             $data['ecs_number'] = $ecs;
         }
 
+        //record ECS registration payment for OLD Employers
+        if($data['employer_status'] != "new") {
+            $data['paid_registration'] = 1;
+        }
+
         $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
 
         //send notification

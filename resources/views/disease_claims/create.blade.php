@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-user"></em>
+                                            <em class="icon ni ni-briefcase"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="nature_of_work" name="nature_of_work" value="{{ old('nature_of_work') }}">
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-user"></em>
+                                            <em class="icon ni ni-covid"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="nature_of_disease" name="nature_of_disease"
@@ -114,7 +114,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-hash"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="exposure_years" name="exposure_years" value="{{ old('exposure_years') }}">
@@ -127,7 +127,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-user"></em>
+                                            <em class="icon ni ni-hash"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="exposure_months" name="exposure_months"
@@ -140,7 +140,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-user"></em>
+                                            <em class="icon ni ni-hash"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="exposure_days" name="exposure_days" value="{{ old('exposure_days') }}">
@@ -209,7 +209,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-user"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="medical_last_name" name="medical_last_name"
@@ -220,7 +220,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-user"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="medical_first_name" name="medical_first_name"
@@ -231,7 +231,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-cc-alt"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="medical_practice_number" name="medical_practice_number"
@@ -245,7 +245,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-hash"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="employment_years" name="employment_years"
@@ -258,7 +258,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <div class="form-icon form-icon-right">
-                                            <em class="icon ni ni-mobile"></em>
+                                            <em class="icon ni ni-hash"></em>
                                         </div>
                                         <input type="text" class="form-control form-control-xl form-control-outlined"
                                             id="employment_months" name="employment_months"
