@@ -342,6 +342,9 @@
                                                             name="certificate_of_incorporation"
                                                             placeholder="Certificate of Incorporation" accept=".pdf"
                                                             required>
+                                                        <small id="coi_error"
+                                                            class="help-block text-danger d-none">Uploaded file too
+                                                            large.</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -385,6 +388,7 @@
                                     <div class="nk-stepper-step text-center">
                                         <h5 class="title mb-2">You Are Almost Done!</h5>
                                         <p class="text-soft">Click submit to complete registration.</p>
+                                        <h6 id="cname"></h6>
                                         <div class="gfx w-50 mx-auto">
                                             <svg width="80%" viewBox="0 0 228 157" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -2786,9 +2790,42 @@
         $(document).ready(function() {
             let lga_holder = '';
 
+            //check uploaded file size on client
+            $('#certificate_of_incorporation').on('change', function() {
+                let numberOfBytes = this.files[0].size;
+                // Approximate to the closest prefixed unit
+                const units = [
+                    "B",
+                    "KiB",
+                    "MiB",
+                    "GiB",
+                    "TiB",
+                    "PiB",
+                    "EiB",
+                    "ZiB",
+                    "YiB",
+                ];
+                const exponent = Math.min(
+                    Math.floor(Math.log(numberOfBytes) / Math.log(1024)),
+                    units.length - 1,
+                );
+                const approx = numberOfBytes / 1024 ** exponent;
+                const output =
+                    exponent === 0 ?
+                    `${numberOfBytes} bytes` :
+                    `${approx.toFixed(3)} ${
+                  units[exponent]
+                }`;
+                if (this.files[0].size > 5 * 1024 * 1024) {
+                    $('#coi_error').removeClass('d-none')
+                    $('#coi_error').html('File size is greater than 5MiB: [' + output + ']');
+                } else {
+                    $('#coi_error').addClass('d-none')
+                }
+            });
+
             //IF OLD OR NEW EMPLOYERR
             $('input[name="employer_status"]').change(function() {
-                console.log($(this).val)
                 if ($('input[name="employer_status"]:checked').val() == 'new') {
                     $('.will-hide').addClass('d-none');
                     $('#ecs_number').val('');
@@ -2797,6 +2834,11 @@
                 }
             });
             $('input[name="employer_status"]').trigger('change');
+
+            //set company name
+            $('#company_name').change(function() {
+                $('#cname').html($(this).val());
+            })
 
             //FETCH LGAs FROM STATE ID
             const lUrl = "{{ route('employer.lgas') }}?state=";
@@ -2810,7 +2852,8 @@
                     $('#company_localgovt').empty();
                     var lgas = '';
                     $.each(response.data, function(a, b) {
-                        lgas += '<option value="' + b.id + '" '+(b.id=lga_holder ? 'selected':'')+'>' + b.name + '</option>';
+                        lgas += '<option value="' + b.id + '" ' + (b.id = lga_holder ?
+                            'selected' : '') + '>' + b.name + '</option>';
                     });
                     $('#company_localgovt').html(lgas);
                     $('#company_localgovt').trigger('change');
@@ -2851,32 +2894,34 @@
                         // Pre-fill the form fields with the retrieved data
                         $('#branch_id').val(data.branch_id);
                         $('#branch_id').trigger('change');
-                        $('#contact_surname').val(data.contact_surname).prop('readonly', false)
-                            .focus();
-                        $('#contact_firstname').val(data.contact_firstname).prop('readonly', false)
-                            .focus();
-                        $('#contact_middlename').val(data.contact_middlename).prop('readonly',
-                            false).focus();
-                        $('#contact_position').val(data.contact_position).prop('readonly', true)
-                            .focus();
-                        $('#company_phone').val(data.company_phone).prop('readonly', false).focus();
-                        $('#contact_number').val(data.contact_number).prop('readonly', false)
-                            .focus();
-                        $('#company_name').val(data.company_name).prop('readonly', true).focus();
+                        $('#contact_surname').val(data.contact_surname)
+                            .focus() //.prop('readonly',false);
+                        $('#contact_firstname').val(data.contact_firstname)
+                            .focus() //.prop('readonly',false);
+                        $('#contact_middlename').val(data.contact_middlename)
+                            .focus() //.prop('readonly',false);
+                        $('#contact_position').val(data.contact_position)
+                            .focus() //.prop('readonly',true);
+                        $('#company_phone').val(data.company_phone)
+                            .focus() //.prop('readonly', false);
+                        $('#contact_number').val(data.contact_number)
+                            .focus() //.prop('readonly',false);
+                        $('#company_name').val(data.company_name).focus() //.prop('readonly', true);
                         $('#business_area').val(data.business_area);
                         $('#business_area').trigger('change');
-                        $('#company_rcnumber').val(data.company_rcnumber).prop('readonly', true)
-                            .focus();
+                        $('#company_rcnumber').val(data.company_rcnumber)
+                            .focus() //.prop('readonly',true);
                         //$('#cac_reg_year').val(new Date(cac_reg_year).toLocaleDateString('en-US')).focus();
                         $('#cac_reg_year').val(data.cac_reg_year); //.focus();
                         //$('#cac_reg_year').datepicker({defaultDate: new Date (queryDate)});
-                        $('#company_email').val(data.company_email).prop('readonly', true).focus();
-                        $('#company_localgovt').val(data.company_localgovt).prop(
-                            'readonly', false);
-                            lga_holder = data.company_localgovt;
-                        $('#company_state').val(data.company_state).prop('readonly', false);
+                        $('#company_email').val(data.company_email)
+                            .focus() //.prop('readonly', true);
+                        $('#company_localgovt').val(data
+                            .company_localgovt) //.prop('readonly', false);
+                        lga_holder = data.company_localgovt;
+                        $('#company_state').val(data.company_state) //.prop('readonly', false);
                         $('#company_state').trigger('change');
-                        $('#company_address').val(data.company_address).prop('readonly', false);
+                        $('#company_address').val(data.company_address) //.prop('readonly', false);
                         $('#employer_id').val(data.id);
                         /*
                         $('#address').val(data.address).prop('readonly', true).focus();
