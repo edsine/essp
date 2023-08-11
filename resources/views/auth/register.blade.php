@@ -95,7 +95,8 @@
                                                 <div
                                                     class="custom-control custom-control-sm custom-radio pro-control custom-control-full">
                                                     <input type="radio" class="custom-control-input"
-                                                        name="employer_status" id="new_employer" value="new" required>
+                                                        name="employer_status" id="new_employer" value="new" checked
+                                                        required>
                                                     <label class="custom-control-label" for="new_employer">
                                                         <span class="d-flex flex-column text-center px-sm-3">
                                                             <em
@@ -133,13 +134,27 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <button type="button"
-                                                    class="btn btn-primary btn-block search-ecs">Search</button>
+                                                    class="btn btn-info btn-block search-ecs">Search</button>
                                             </div>
                                             <div id="alert-div">
                                                 <div class="alert alert-info">
                                                     <strong>INFO:</strong>
                                                     <span>Provide and ECS Number to prepopulate your details!</span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="row g-3 mt-1 otp-div d-none">
+                                            <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    <div class="form-control-wrap">
+                                                        <input type="text" name="otp" id="otp"
+                                                            class="form-control" placeholder="Enter OTP here">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button type="button" class="btn btn-info btn-block verify-otp">Verify
+                                                    OTP</button>
                                             </div>
                                         </div>
                                         <div class="row g-3 mt-1">
@@ -2827,10 +2842,13 @@
             //IF OLD OR NEW EMPLOYERR
             $('input[name="employer_status"]').change(function() {
                 if ($('input[name="employer_status"]:checked').val() == 'new') {
-                    $('.will-hide').addClass('d-none');
+                    $('.otp-div').addClass('d-none');//hide otp div
+                    $('.will-hide').addClass('d-none');//hide search ecs div
                     $('#ecs_number').val('');
+                    $('.step-next').show();
                 } else {
                     $('.will-hide').removeClass('d-none');
+                    $('.step-next').hide();
                 }
             });
             $('input[name="employer_status"]').trigger('change');
@@ -2891,6 +2909,9 @@
                     data = response.employer;
 
                     if (response.status == 'success') {
+                        //show opt verification
+                        $('.otp-div').removeClass('d-none');
+
                         // Pre-fill the form fields with the retrieved data
                         $('#branch_id').val(data.branch_id);
                         $('#branch_id').trigger('change');
@@ -2927,12 +2948,55 @@
                         $('#address').val(data.address).prop('readonly', true).focus();
                          */
                     } else {
-
+                        //hide otp div
+                        $('.otp-div').addClass('d-none');
                     }
 
                     $('#ecs_number').prop('disabled', false);
                 });
             });
+
+            //hide otp if employer changed until searched
+            $('#ecs_number').bind('input', function() {
+                $('.otp-div').addClass('d-none');
+            });
+
+            //VERIFY OTP
+            const oUrl = "{{ route('employer.otp') }}";
+
+            $('.verify-otp').click(function() {
+                $.ajax({
+                    url: oUrl,
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        ecs: $("#ecs_number").val(),
+                        otp: $("#otp").val(),
+                    },
+                    dataType: 'json',
+                    beforeSend: function(xhr) {
+                        $('#otp').prop('disabled', true);
+                        $('.verify-otp').html(
+                                '<em class="icon ni ni-loader ni-animate"></em> Verifying...')
+                            .prop('disabled', true);
+                    },
+                }).done(function(response) {
+                    $('.verify-otp').html('Verify OTP').prop('disabled', false);
+                    $('#otp').prop('disabled', false);
+
+                    if (response.status == 'success') {
+                        $('.otp-div').addClass('d-none');//remove opt row
+                        $('.step-next').show();//show continue button
+                    } else {
+                        $('.step-next').hide();//hide continue button
+                    }
+                    Swal.fire({
+                        title: response.message,
+                        //text: 'Verification successful!',
+                        icon: response.status,
+                    });
+                });
+            })
         });
     </script>
 @endpush

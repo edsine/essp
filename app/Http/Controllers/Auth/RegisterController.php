@@ -8,7 +8,7 @@ use App\Models\Branch;
 use App\Models\State;
 use App\Providers\RouteServiceProvider;
 use App\Models\Employer;
-use App\Notifications\EmployerRegistrationNotification;
+//use App\Notifications\EmployerRegistrationNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;

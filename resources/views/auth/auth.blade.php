@@ -132,7 +132,7 @@
                 <div class="modal-body modal-body-md">
                     <h5 class="title mb-4">Select Your Country</h5>
                     <div class="nk-country-region">
-                        <ul class="country-list text-center gy-2">
+                        {{-- <ul class="country-list text-center gy-2">
                             <li>
                                 <a href="#" class="country-item">
                                     <img src="./images/flags/arg.png" alt="" class="country-flag">
@@ -241,7 +241,7 @@
                                     <span class="country-name">United State</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </div><!-- .modal-content -->

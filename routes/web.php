@@ -25,6 +25,7 @@ Auth::routes();
 /**
  * UNAUTHENTICATED ROUTES
  */
+Route::post('employer/otp', [App\Http\Controllers\EmployerController::class, 'verifyotp'])->name('employer.otp');
 Route::get('employer/ecs', [App\Http\Controllers\EmployerController::class, 'ecs'])->name('employer.ecs');
 Route::get('employer/lgas', [App\Http\Controllers\EmployerController::class, 'lgas'])->name('employer.lgas');
 
