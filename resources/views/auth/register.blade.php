@@ -164,7 +164,7 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    {{-- <label class="form-label" for="cp1-team-size">Select Branch</label> --}}
+                                                    <label class="form-label" for="cp1-team-size">Select Branch</label>
                                                     <div class="form-control-wrap">
                                                         <select class="form-select js-select2" id="branch_id"
                                                             name="branch_id" data-placeholder="Select Branch"

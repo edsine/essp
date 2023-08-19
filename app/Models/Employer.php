@@ -35,6 +35,7 @@ class Employer extends Authenticatable
         'company_address',
         'company_email',
         'password',
+        'account_officer_id',
         //'certificate_of_incorporation'
         'user_id',
         'ecs_number',
