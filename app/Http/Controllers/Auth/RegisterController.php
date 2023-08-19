@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -116,13 +117,27 @@ class RegisterController extends Controller
         if($data['employer_status'] != "new") {
             $data['paid_registration'] = 1;
         }
+        // Randomly select a user_id from the staff table in the same branch
+        $randomUserId = DB::table('staff')
+        ->where('branch_id', $data['branch_id'])
+        ->inRandomOrder()
+        ->value('user_id');
+
+       /*  if ($randomUserId) {
+            // Do something with the $randomUserId
+        } else {
+            // No user found in the same branch
+            $errorMessage = "No user found in the same branch.";
+        } */
+
+        $data['account_officer_id'] = $randomUserId;
 
         $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
 
         //send notification
         //$employer->notify(new EmployerRegistrationNotification($employer));
         //send email
-        Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $data['password']));
+        //Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $data['password']));
 
         return $employer;
     }
