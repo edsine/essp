@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -129,6 +130,15 @@ class RegisterController extends Controller
             // No user found in the same branch
             $errorMessage = "No user found in the same branch.";
         } */
+        $file = $request->file('certificate_of_incorporation');
+        $path = "employer/";
+         $title = str_replace(' ', '', $data['company_name']);
+         $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
+     
+         // Upload the file to the S3 bucket
+         $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+ 
+         $data['certificate_of_incorporation'] =  $documentUrl;
 
         $data['account_officer_id'] = $randomUserId;
 
