@@ -130,15 +130,15 @@ class RegisterController extends Controller
             // No user found in the same branch
             $errorMessage = "No user found in the same branch.";
         } */
-        $file = $request->file('certificate_of_incorporation');
+        /* $file = $request->file('certificate_of_incorporation');
         $path = "employer/";
          $title = str_replace(' ', '', $data['company_name']);
          $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
      
          // Upload the file to the S3 bucket
-         $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName);
+         $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName); */
  
-         $data['certificate_of_incorporation'] =  $documentUrl;
+         $data['certificate_of_incorporation'] =  "0";//$documentUrl;
 
         $data['account_officer_id'] = $randomUserId;
 
