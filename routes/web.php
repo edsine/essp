@@ -16,9 +16,13 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 Route::get('/', function () {
     //return view('welcome');
-    return view('auth.login'); //Redirect on load to login or home
+    return view('landing.index'); //Redirect on load to login or home
 });
 
+Route::get('login', function () {
+    //return view('welcome');
+    return view('auth.login'); //Redirect on load to login or home
+});
 //LARAVEL DEFAULT
 Auth::routes();
 
