@@ -11,22 +11,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="{{asset('landing_assets/images/favicon.png')}}" type="image/png">
+    <link rel="shortcut icon" href="{{asset('assets/assets/images/favicon.png')}}" type="image/png">
 
     <!--====== Animate CSS ======-->
-    <link rel="stylesheet" href="{{asset('landing_assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/assets/css/animate.css')}}">
 
     <!--====== lineicons CSS ======-->
-    <link rel="stylesheet" href="{{asset('landing_assets/css/lineicons.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/assets/css/lineicons.css')}}">
 
     <!--====== Bootstrap CSS ======-->
-    <link rel="stylesheet" href="{{asset('landing_assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/assets/css/bootstrap.min.css')}}">
 
     <!--====== Default CSS ======-->
-    <link rel="stylesheet" href="{{asset('landing_assets/css/default.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/assets/css/default.css')}}">
 
     <!--====== Style CSS ======-->
-    <link rel="stylesheet" href="{{asset('landing_assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/assets/css/style.css')}}">
 
 </head>
 
@@ -66,7 +66,7 @@
         <div class="footer-shape shape-6"></div> -->
         <!-- <div class="footer-shape shape-7"></div> -->
         <div class="footer-shape shape-8">
-            <img class="svg" src="{{asset('landing_assets/images/footer-shape.svg" alt="Shape">
+            <img class="svg" src="{{asset('assets/assets/images/footer-shape.svg')}}" alt="Shape">
         </div>
 
         <div class="footer-widget pt-30 pb-80">
@@ -181,24 +181,24 @@
 
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js')}}"></script>
         <!--====== Jquery js ======-->
-        <script src="{{asset('landing_assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
-        <script src="{{asset('landing_assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>
+        <script src="{{asset('assets/assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+        <script src="{{asset('assets/assets/js/vendor/modernizr-3.7.1.min.js')}}"></script>
 
         <!--====== Bootstrap js ======-->
-        <script src="{{asset('landing_assets/js/popper.min.js')}}"></script>
-        <script src="{{asset('landing_assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/assets/js/popper.min.js')}}"></script>
+        <script src="{{asset('assets/assets/js/bootstrap.min.js')}}"></script>
 
 
         <!--====== WOW js ======-->
-        <script src="{{asset('landing_assets/js/wow.min.js')}}"></script>
+        <script src="{{asset('assets/assets/js/wow.min.js')}}"></script>
 
 
         <!--====== Scrolling Nav js ======-->
-        <script src="{{asset('landing_assets/js/jquery.easing.min.js')}}"></script>
-        <script src="{{asset('landing_assets/js/scrolling-nav.js')}}"></script>
+        <script src="{{asset('assets/assets/js/jquery.easing.min.js')}}"></script>
+        <script src="{{asset('assets/assets/js/scrolling-nav.js')}}"></script>
 
         <!--====== Main js ======-->
-        <script src="{{asset('landing_assets/js/main.js')}}"></script>
+        <script src="{{asset('assets/assets/js/main.js')}}"></script>
 
 </body>
 
