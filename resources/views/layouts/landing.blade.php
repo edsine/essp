@@ -130,8 +130,7 @@
                                 <li>
                                     <div class="contact-info d-flex">
                                         <div class="info-content media-body">
-                                            <p class="text"><a href="#"><i class="lni lni-envelope"></i>
-                                                    support@NSITF.GOV.NG</a></p>
+                                            <p class="text"><a href="#"><i class="lni lni-envelope"></i>support@nsitf.gov.ng</a></p>
                                         </div>
                                     </div> <!-- contact info -->
                                 </li>
