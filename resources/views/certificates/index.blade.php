@@ -155,7 +155,8 @@
                                 <td><span
                                         class="tb-status text-{{ $certificate->processing_status == 0 ? 'warning' : 'success' }}">{{ $certificate->processing_status == 0 ? 'PENDING' : 'DONE' }}</span>
                                 </td>
-                                <td>Not Available</td>
+                                <td><a href="{{ route('certificate.details', ['certificateId' => $certificate->id]) }}">View Certificate Details</a>
+                                </td>
                                 <td>
                                     <a href="/approval/request/timeline"><span class="nk-menu-icon text-info"><em
                                                 class="icon ni ni-eye"></em></span></a>

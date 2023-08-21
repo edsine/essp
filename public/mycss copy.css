@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.certificate {
+    width: 800px;
+    margin: 50px auto;
+    border: 2px solid #000;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    background-color: #fff;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000;
+}
+
+.header img {
+    max-width: 150px;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+h2, h3 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.content {
+    background-color: #c0ebcc;
+    padding: 20px;
+    margin-top: 20px; 
+}
+
+p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 5px 10px;
+    border: 1px solid #000;
+}
+
+.table-container td:first-child {
+    font-weight: bold;
+}
+
+.line-with-content {
+    position: relative;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.line-with-content hr {
+    border: none;
+    border-top: 2px solid #000;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.line-with-content p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 0 10px;
+}
+.p{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+
+.original{
+    display: flex;
+    justify-content: space-between;
+}
+
+.atp{
+    display: flex;
+    flex-direction: column;
+    
+}
+.atp h1{
+
+align-self: center;
+}
+
+
+#barcode{
+    width: 20vh;
+    height: 10vh;
+
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.first{
+    max-width: 100%;
+    display: inline;
+}
+
+.second{
+    max-width: 100%;
+    display: inline;
+}
+
+.form-container {
+    position: relative; /* Create a positioning context for the watermark */
+    width: 800px; /* Adjust this width as needed */
+    margin: 0 auto;
+  }
+  
+  .form-container::before {
+    content: ""; /* Create a pseudo-element for the watermark */
+    position: absolute;
+    top: 50%; /* Position the watermark vertically */
+    left: 50%; /* Position the watermark horizontally */
+    transform: translate(-50%, -50%); /* Center the watermark */
+    width: 300px; /* Adjust the watermark's width */
+    height: auto; /* Let the height adjust proportionally */
+    opacity: 0.2; /* Adjust the opacity to control the watermark effect */
+    pointer-events: none; /* Ensure the pseudo-element doesn't interfere with form interactions */
+    background-image: url('NSITF-logo.png'); /* Replace with your logo's path */
+    background-repeat: no-repeat;
+    background-size: contain; /* Adjust this based on how you want the logo's size to be */
+  }
+  

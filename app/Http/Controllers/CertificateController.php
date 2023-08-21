@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCertificateRequest;
 use App\Http\Requests\UpdateCertificateRequest;
 use App\Models\Certificate;
+use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CertificateController extends Controller
 {
@@ -22,6 +27,80 @@ class CertificateController extends Controller
         $amount = 50000;
         return view('certificates.index', compact('certificates', 'amount', 'pending'));
     }
+
+    public function displayCertificateDetails($certificateId)
+{
+    $certificate = Certificate::with(['employer', 'employer.employees', 'employer.payments'])->find($certificateId);
+
+    // Get the last recent 3 years
+    $currentYear = now()->year;
+    $lastThreeYears = [$currentYear - 2, $currentYear - 1, $currentYear];
+
+    $totalEmployees = [];
+    $paymentsAmount = [];
+
+    foreach ($lastThreeYears as $year) {
+        $totalEmployees[$year] = DB::table('employees')
+            ->where('employer_id', $certificate->employer->id)
+            ->whereYear('created_at', '=', $year) // Update the whereYear condition 
+            ->count();
+
+        $paymentsAmount[$year] = DB::table('payments')
+            ->where('employer_id', $certificate->employer->id)
+            ->whereYear('invoice_generated_at', '=', $year) // Update the whereYear condition
+            ->sum('amount');
+    }
+
+    $currentYearExpiration1 = Payment::where('employer_id', $certificate->employer->id)
+        ->whereYear('invoice_generated_at','=', $currentYear)
+        ->value('invoice_duration');
+
+    $currentYearExpiration = Carbon::createFromFormat('Y-m-d', $currentYearExpiration1)->format('F d, Y');
+
+    // Generate a QR code for the data 'NSITF'
+    $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
+
+
+    return view('certificates.details', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
+
+}
+
+public function downloadCertificateDetails($certificateId)
+{
+    $certificate = Certificate::with(['employer', 'employer.employees', 'employer.payments'])->find($certificateId);
+
+    $currentYear = now()->year;
+    $lastThreeYears = [$currentYear - 2, $currentYear - 1, $currentYear];
+
+    $totalEmployees = [];
+    $paymentsAmount = [];
+
+    foreach ($lastThreeYears as $year) {
+        $totalEmployees[$year] = DB::table('employees')
+            ->where('employer_id', $certificate->employer->id)
+            ->whereYear('created_at', '=', $year)
+            ->count();
+
+        $paymentsAmount[$year] = DB::table('payments')
+            ->where('employer_id', $certificate->employer->id)
+            ->whereYear('invoice_generated_at', '=', $year)
+            ->sum('amount');
+    }
+
+    $currentYearExpiration1 = Payment::where('employer_id', $certificate->employer->id)
+        ->whereYear('invoice_generated_at', '=', $currentYear)
+        ->value('invoice_duration');
+
+    $currentYearExpiration = Carbon::createFromFormat('Y-m-d', $currentYearExpiration1)->format('F d, Y');
+
+    // Generate a QR code for the data 'NSITF'
+    $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
+
+    $pdf = PDF::loadView('certificates.details', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
+
+    return $pdf->download('certificate_details.pdf');
+}
+
 
     /**
      * Show the form for creating a new resource.
