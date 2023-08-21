@@ -68,7 +68,7 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-lg btn-primary"><em
-                                                class="icon ni ni-upload-cloud me-2"></em> Upload Certificate</button>
+                                                class="icon ni ni-upload-cloud me-2"></em> Upload Request Letter</button>
                                     </div>
                                 </form>
                             </div>
