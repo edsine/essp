@@ -17,4 +17,10 @@ class Payment extends Model
     public function employer(){
         return $this->belongsTo(Employer::class);
     }
+
+    public function certificate()
+{
+    return $this->belongsTo(Certificate::class);
+}
+
 }

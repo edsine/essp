@@ -67,6 +67,10 @@ Route::middleware(['auth'])->group(function () {
     /**
      * CERTIFICATES
      */
+    Route::get('certificate/{certificateId}/details', 'App\Http\Controllers\CertificateController@displayCertificateDetails')->name('certificate.details');
+    Route::get('certificate/{certificateId}/download', 'App\Http\Controllers\CertificateController@downloadCertificateDetails')->name('certificate.download');
+
+
     Route::resource('certificate', App\Http\Controllers\CertificateController::class);
 
 
@@ -76,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('claim/accident', App\Http\Controllers\AccidentClaimController::class);
     Route::resource('claim/death', App\Http\Controllers\DeathClaimController::class);
     Route::resource('claim/disease', App\Http\Controllers\DiseaseClaimController::class);
+    
 });
 
 Route::get('/notification', function () {
