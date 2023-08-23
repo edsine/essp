@@ -76,8 +76,9 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-about mt-50 wow fadeIn" data-wow-duration="1.3s" data-wow-delay="0.2s">
-                            <a class="logo" href="#" style="color:green">
-                                <strong style="font-size:20px;">E S S P</strong>
+                            <a class="navbar-brand" href="index.html" style="text-decoration: none;">
+                                <img style="height: 6vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
+                                <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                             </a>
                             <p class="text">Experience the transformational power of ESSP. We are committed to
                                 continuously enhancing your journey</p>
@@ -91,25 +92,23 @@
                     </div>
                     <div class="col-lg-5 col-md-6">
                         <div class="footer-link d-flex flex-wrap">
-                            <div class="footer-link-wrapper mt-45 wow fadeIn" data-wow-duration="1.3s"
-                                data-wow-delay="0.4s">
+                            <div class="footer-link-wrapper mt-45 wow fadeIn" data-wow-duration="1.3s" data-wow-delay="0.4s">
                                 <div class="footer-title">
                                     <h4 class="title">Quick Links</h4>
                                 </div>
                                 <ul class="link">
                                     <li><a class="" href="#">Home</a></li>
-                                    <li><a class="" href="#">Testimonial</a></li>
+                                    <li><a class="" href="#">Login</a></li>
                                     <li><a class="" href="#">Contact</a></li>
                                 </ul>
                             </div> <!-- footer link wrapper -->
 
-                            <div class="footer-link-wrapper mt-45 wow fadeIn" data-wow-duration="1.3s"
-                                data-wow-delay="0.6s">
+                            <div class="footer-link-wrapper mt-45 wow fadeIn" data-wow-duration="1.3s" data-wow-delay="0.6s">
                                 <div class="footer-title">
                                     <h4 class="title">Support</h4>
                                 </div>
                                 <ul class="link">
-                                    <li><a class="" href="#">FAQ</a></li>
+                                    <li><a class="" href="#">FAQ on Servicomm</a></li>
                                     <li><a class="" href="#">Privacy Policy</a></li>
                                     <li><a class="" href="#">Terms Of Use</a></li>
 
@@ -133,8 +132,7 @@
                                 <li>
                                     <div class="contact-info d-flex">
                                         <div class="info-content media-body">
-                                            <p class="text"><a href="#"><i class="lni lni-envelope"></i>
-                                                    infoessp.gov.ng</a></p>
+                                            <p class="text"><a href="#"><i class="lni lni-envelope"></i>support@nsitf.gov.ng</a></p>
                                         </div>
                                     </div> <!-- contact info -->
                                 </li>
@@ -142,7 +140,7 @@
                                 <li>
                                     <div class="contact-info d-flex">
                                         <div class="info-content media-body">
-                                            <p class="text"><i class="lni lni-map"></i> 123 tree street, abuja Nigeria
+                                            <p class="text"><i class="lni lni-map"></i>Plot 794, Mohammadu Buhari Way, Central Business Area, P.M.B. 446, Garki, Abuja, Nigeria.
                                             </p>
                                         </div>
                                     </div> <!-- contact info -->

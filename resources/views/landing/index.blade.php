@@ -16,9 +16,7 @@
                         </a>
 
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="toggler-icon"></span>
                             <span class="toggler-icon"></span>
                             <span class="toggler-icon"></span>
@@ -89,9 +87,9 @@
     </div> <!-- header shape -->
     </div> <!-- header hero -->
 </header>
-   <!--====== SERVICES PART START ======-->
+<!--====== SERVICES PART START ======-->
 
-   <section id="why" class="services-area pt-110 pb-120">
+<section id="why" class="services-area pt-110 pb-120">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
@@ -103,10 +101,8 @@
         </div> <!-- row -->
         <div class="row">
             <div class="col-lg-3 col-sm-6">
-                <div class="single-services shadow text-center mt-30 wow fadeInUpBig" style=""
-                    data-wow-duration="1.3s" data-wow-delay="0.2s">
-                    <div class="services-icon d-flex align-items-center justify-content-center"
-                        style="background-color:#02a14d;border:7px solid rgb(226, 226, 226);">
+                <div class="single-services shadow text-center mt-30 wow fadeInUpBig" style="" data-wow-duration="1.3s" data-wow-delay="0.2s">
+                    <div class="services-icon d-flex align-items-center justify-content-center" style="background-color:#02a14d;border:7px solid rgb(226, 226, 226);">
                         <i class="lni lni-layers"></i>
                     </div>
                     <div class="services-content">
@@ -117,10 +113,8 @@
                 </div> <!-- single services -->
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="single-services text-center mt-30 wow fadeInUpBig" data-wow-duration="1.3s"
-                    data-wow-delay="0.4s">
-                    <div class="services-icon d-flex align-items-center justify-content-center"
-                        style="background-color:rgba(0, 0, 0, 0.81);border:7px solid rgb(230, 228, 228);">
+                <div class="single-services text-center mt-30 wow fadeInUpBig" data-wow-duration="1.3s" data-wow-delay="0.4s">
+                    <div class="services-icon d-flex align-items-center justify-content-center" style="background-color:rgba(0, 0, 0, 0.81);border:7px solid rgb(230, 228, 228);">
                         <i class="lni lni-layout"></i>
                     </div>
                     <div class="services-content">
@@ -130,10 +124,8 @@
                 </div> <!-- single services -->
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="single-services shadow text-center mt-30 wow fadeInUpBig" data-wow-duration="1.3s"
-                    data-wow-delay="0.6s">
-                    <div class="services-icon d-flex align-items-center justify-content-center"
-                        style="background-color:#02a14d;border:7px solid rgb(230, 229, 229);">
+                <div class="single-services shadow text-center mt-30 wow fadeInUpBig" data-wow-duration="1.3s" data-wow-delay="0.6s">
+                    <div class="services-icon d-flex align-items-center justify-content-center" style="background-color:#02a14d;border:7px solid rgb(230, 229, 229);">
                         <i class="lni lni-bolt"></i>
                     </div>
                     <div class="services-content">
@@ -143,10 +135,8 @@
                 </div> <!-- single services -->
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="single-services shadowservices-color-4 text-center mt-30 wow fadeInUpBig"
-                    data-wow-duration="1.3s" data-wow-delay="0.8s">
-                    <div class="services-icon d-flex align-items-center justify-content-center"
-                        style="background-color:rgba(0, 0, 0, 0.813);border-color: 2px solid white;">
+                <div class="single-services shadowservices-color-4 text-center mt-30 wow fadeInUpBig" data-wow-duration="1.3s" data-wow-delay="0.8s">
+                    <div class="services-icon d-flex align-items-center justify-content-center" style="background-color:rgba(0, 0, 0, 0.813);border-color: 2px solid white;">
                         <i class="lni lni-protection"></i>
                     </div>
                     <div class="services-content">
@@ -200,7 +190,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-6 col-md-9">
                 <div class="download-image mt-50 wow fadeInRightBig" data-wow-duration="1.3s" data-wow-delay="0.2s">
-                    <img class="" style="border-radius:25px;" src="{{ asset('assets/oo.jpg') }}" alt="download">
+                    <img class="" style="border-radius:25px;" src="{{ asset('assets/reps.jpg') }}" alt="download">
 
                     <!-- <div class="download-shape-1"></div> -->
                     <div class="download-shape-2">
@@ -209,15 +199,12 @@
                 </div> <!-- download image -->
             </div>
             <div class="col-lg-6">
-                <div class="download-content mt-45 wow fadeInLeftBig" data-wow-duration="1.3s"
-                    data-wow-delay="0.5s">
-                    <h3 class="download-title">Elevate Your Experience!</h3>
-                    <p class="text">Experience the transformational power of ESSP. We are committed to continuously
-                        enhancing your journey through ongoing updates and improvements. Your feedback shapes the
-                        evolution of our platform, ensuring it remains tailored to your needs.
+                <div class="download-content mt-45 wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.5s">
+                    <h3 class="download-title">Dedicated 24/7 Support from Servicom</h3>
+                    <p class="text">Experience the transformational power of ESSP, backed by the unwavering support of Servicom, our specialized department within NSITF. We understand that your needs don't adhere to a 9-to-5 schedule, which is why we offer round-the-clock assistance to ensure your journey is always smooth, your feedback continues to play a vital role in the evolution of our platform.
                     </p>
                     <ul>
-
+                        <a href="http://servicomnsitf.gov.ng" rel="nofollow" class="main-btn">Explore 24/7 Support</a>
                     </ul>
                 </div> <!-- download image -->
             </div>
@@ -227,8 +214,6 @@
 
 <!--====== DOWNLOAD PART ENDS ======-->
 @endsection
-    <!--====== DOWNLOAD PART ENDS ======-->
+<!--====== DOWNLOAD PART ENDS ======-->
 
-    <!--====== PART START ======-->
-
-   
+<!--====== PART START ======-->
