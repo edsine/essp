@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12" style="background-color: #ffffff;">
                     <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
-                        <a class="navbar-brand" href="index.html" style="text-decoration: none;">
+                        <a class="navbar-brand" href="{{ url('/') }}" style="text-decoration: none;">
                             <img style="height: 6vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
                             <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                         </a>
@@ -30,10 +30,10 @@
 
 
                                 <li class="nav-item">
-                                    <a class="page-scroll1" href="http://ebsnsitf.com.ng/register">Register</a>
+                                    <a class="page-scroll1" href="{{ route('register') }}">Register</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="page-scroll1" href="http://ebsnsitf.com.ng/login">Login</a>
+                                    <a class="page-scroll1" href="{{ route('login') }}">Login</a>
                                 </li>
                             </ul>
                         </div> <!-- navbar collapse -->
@@ -55,10 +55,13 @@
                             the power of ESSP and experience a future where administrative tasks are effortless,
                             communication is seamless, and convenience is paramount.</p>
                         <ul class="d-flex">
-                            <li><a href="http://ebsnsitf.com.ng/register" rel="nofollow" class="main-btn wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.8s">Register
+                            <li><a href="{{ route('register') }}" rel="nofollow"
+                                    class="main-btn wow fadeInLeftBig" data-wow-duration="1.3s"
+                                    data-wow-delay="0.8s">Register
                                 </a>
                             </li>
-                            <li><a href="http://ebsnsitf.com.ng/login" rel="nofollow" class="main-btn wow fadeInLeftBig" data-wow-duration="1.3s" data-wow-delay="0.8s">Login
+                            <li><a href="{{ route('login') }}" rel="nofollow" class="main-btn wow fadeInLeftBig" data-wow-duration="1.3s"
+                                    data-wow-delay="0.8s">Login
                                 </a>
                             </li>
 
@@ -169,7 +172,7 @@
                             important paperwork.
                         </p>
                     </div> <!-- section title -->
-                    <a href="http://ebsnsitf.com.ng/login" rel="nofollow" class="main-btn">Download
+                    <a href="{{ route('verification') }}" rel="nofollow" class="main-btn">Verify
                         Certificates</a>
                 </div> <!-- about content -->
             </div>
