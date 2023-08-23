@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\Employer;
+use Illuminate\Http\Request;
 
 class CertificateController extends Controller
 {
@@ -58,11 +60,67 @@ class CertificateController extends Controller
     $currentYearExpiration = Carbon::createFromFormat('Y-m-d', $currentYearExpiration1)->format('F d, Y');
 
     // Generate a QR code for the data 'NSITF'
+    //$qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
     $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
 
 
     return view('certificates.details', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
 
+}
+
+public function displayCertificateDetailsPage($certificateId)
+{
+    $certificate = Certificate::with(['employer', 'employer.employees', 'employer.payments'])->find($certificateId);
+
+    // Get the last recent 3 years
+    $currentYear = now()->year;
+    $lastThreeYears = [$currentYear - 2, $currentYear - 1, $currentYear];
+
+    $totalEmployees = [];
+    $paymentsAmount = [];
+
+    foreach ($lastThreeYears as $year) {
+        $totalEmployees[$year] = DB::table('employees')
+            ->where('employer_id', $certificate->employer->id)
+            ->whereYear('created_at', '=', $year) // Update the whereYear condition 
+            ->count();
+
+        $paymentsAmount[$year] = DB::table('payments')
+            ->where('employer_id', $certificate->employer->id)
+            ->whereYear('invoice_generated_at', '=', $year) // Update the whereYear condition
+            ->sum('amount');
+    }
+
+    $currentYearExpiration1 = Payment::where('employer_id', $certificate->employer->id)
+        ->whereYear('invoice_generated_at','=', $currentYear)
+        ->value('invoice_duration');
+
+    $currentYearExpiration = Carbon::createFromFormat('Y-m-d', $currentYearExpiration1)->format('F d, Y');
+
+    // Generate a QR code for the data 'NSITF'
+    $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
+
+
+    return view('certificates.detailspage', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
+
+}
+
+public function verification(){
+
+    return view('certificates.verification');
+
+}
+public function verifyCertificate(Request $request)
+{
+    $ecsNumber = $request->input('ecs_number');
+    $employer = Employer::where('ecs_number', $ecsNumber)->first();
+
+    if ($employer) {
+        // Redirect to the certificate details using the employer's first certificate (assuming there's a relationship between employer and certificate)
+        return redirect()->route('certificate.detailspage', ['certificateId' => $employer->certificates->first()->id]);
+    } else {
+        return back()->with('error', 'ECS number not found.');
+    }
 }
 
 public function downloadCertificateDetails($certificateId)
