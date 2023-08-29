@@ -117,7 +117,7 @@
                                                             <em
                                                                 class="icon icon-circle icon-circle-lg bg-orange ni ni-briefcase"></em>
                                                             {{-- <span class="lead-text mb-1 mt-3">Old Employer</span> --}}
-                                                            <span class="sub-text">I am an old Employer.</span>
+                                                            <span class="sub-text">I am a registered Employer.</span>
                                                         </span>
                                                     </label>
                                                 </div>

@@ -190,7 +190,7 @@ class PaymentController extends Controller
 
             if ($request->payment_type == 1)
                 return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
-            //return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
+            return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
         } else {
             return redirect()->back()->with('error', 'Problems encountered in generating RRR');
         }

@@ -157,7 +157,7 @@
                                 </td>
                                 <td>Not Available</td>
                                 <td>
-                                    <a href="/approval/request/timeline"><span class="nk-menu-icon text-info"><em
+                                    <a href=""><span class="nk-menu-icon text-info"><em
                                                 class="icon ni ni-eye"></em></span></a>
                                 </td>
                             </tr>
