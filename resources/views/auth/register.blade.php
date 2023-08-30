@@ -2842,8 +2842,8 @@
             //IF OLD OR NEW EMPLOYERR
             $('input[name="employer_status"]').change(function() {
                 if ($('input[name="employer_status"]:checked').val() == 'new') {
-                    $('.otp-div').addClass('d-none');//hide otp div
-                    $('.will-hide').addClass('d-none');//hide search ecs div
+                    $('.otp-div').addClass('d-none'); //hide otp div
+                    $('.will-hide').addClass('d-none'); //hide search ecs div
                     $('#ecs_number').val('');
                     $('.step-next').show();
                 } else {
@@ -2985,10 +2985,10 @@
                     $('#otp').prop('disabled', false);
 
                     if (response.status == 'success') {
-                        $('.otp-div').addClass('d-none');//remove opt row
-                        $('.step-next').show();//show continue button
+                        $('.otp-div').addClass('d-none'); //remove opt row
+                        $('.step-next').show(); //show continue button
                     } else {
-                        $('.step-next').hide();//hide continue button
+                        $('.step-next').hide(); //hide continue button
                     }
                     Swal.fire({
                         title: response.message,
@@ -2999,4 +2999,20 @@
             })
         });
     </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/64ef0da4a91e863a5c10a087/1h92sqjuh';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 @endpush

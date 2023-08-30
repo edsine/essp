@@ -14,7 +14,7 @@
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="./assets/images/NSITF-logo.png">
     <!-- Page Title  -->
-    <title>@yield('title') | {{env('APP_NAME')}}</title>
+    <title>@yield('title') | {{ env('APP_NAME') }}</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="./assets/css/dashlite.css?ver=3.1.3">
     <link id="skin-default" rel="stylesheet" href="./assets/css/theme.css?ver=3.1.3">
@@ -33,56 +33,58 @@
                     <div class="row">
                         <div class="offset-lg-4 col-lg-4 offset-sm-1 col-sm-10 my-4">
                             @if (session('success'))
-                            <div class="example-alert">
-                                <div class="alert alert-primary alert-icon alert-dismissible">
-                                    <em class="icon ni ni-alert-circle"></em>
-                                    <strong>Success:</strong>
-                                    <span>{{session('success')}}</span>
-                                    <button class="close" data-bs-dismiss="alert"></button>
+                                <div class="example-alert">
+                                    <div class="alert alert-primary alert-icon alert-dismissible">
+                                        <em class="icon ni ni-alert-circle"></em>
+                                        <strong>Success:</strong>
+                                        <span>{{ session('success') }}</span>
+                                        <button class="close" data-bs-dismiss="alert"></button>
+                                    </div>
                                 </div>
-                            </div>
                             @elseif (session('info'))
-                            <div class="example-alert">
-                                <div class="alert alert-info alert-icon alert-dismissible">
-                                    <em class="icon ni ni-alert-circle"></em>
-                                    <strong>Info:</strong>
-                                    <span>{{session('info')}}</span>
-                                    <button class="close" data-bs-dismiss="alert"></button>
+                                <div class="example-alert">
+                                    <div class="alert alert-info alert-icon alert-dismissible">
+                                        <em class="icon ni ni-alert-circle"></em>
+                                        <strong>Info:</strong>
+                                        <span>{{ session('info') }}</span>
+                                        <button class="close" data-bs-dismiss="alert"></button>
+                                    </div>
                                 </div>
-                            </div>
                             @elseif (session('warning'))
-                            <div class="example-alert">
-                                <div class="alert alert-warning alert-icon alert-dismissible">
-                                    <em class="icon ni ni-alert-circle"></em>
-                                    <strong>Warning:</strong>
-                                    <span>{{session('warning')}}</span>
-                                    <button class="close" data-bs-dismiss="alert"></button>
+                                <div class="example-alert">
+                                    <div class="alert alert-warning alert-icon alert-dismissible">
+                                        <em class="icon ni ni-alert-circle"></em>
+                                        <strong>Warning:</strong>
+                                        <span>{{ session('warning') }}</span>
+                                        <button class="close" data-bs-dismiss="alert"></button>
+                                    </div>
                                 </div>
-                            </div>
                             @elseif (session('error'))
-                            <div class="example-alert">
-                                <div class="alert alert-danger alert-icon alert-dismissible">
-                                    <em class="icon ni ni-alert-circle"></em>
-                                    <strong>Error:</strong>
-                                    <span>{{session('error')}}</span>
-                                    <button class="close" data-bs-dismiss="alert"></button>
+                                <div class="example-alert">
+                                    <div class="alert alert-danger alert-icon alert-dismissible">
+                                        <em class="icon ni ni-alert-circle"></em>
+                                        <strong>Error:</strong>
+                                        <span>{{ session('error') }}</span>
+                                        <button class="close" data-bs-dismiss="alert"></button>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
 
-                            @if($errors->any())
-                            <div class="example-alert">
-                                <div class="alert alert-danger alert-icon alert-dismissible">
-                                    <em class="icon ni ni-alert-circle"></em>
-                                    <strong>Error:</strong>
-                                    <p><ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul></p>
-                                    <button class="close" data-bs-dismiss="alert"></button>
+                            @if ($errors->any())
+                                <div class="example-alert">
+                                    <div class="alert alert-danger alert-icon alert-dismissible">
+                                        <em class="icon ni ni-alert-circle"></em>
+                                        <strong>Error:</strong>
+                                        <p>
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                        </p>
+                                        <button class="close" data-bs-dismiss="alert"></button>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
                         </div>
                     </div>
@@ -248,4 +250,21 @@
         </div><!-- .modla-dialog -->
     </div><!-- .modal -->
     @stack('scripts')
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/64ef0da4a91e863a5c10a087/1h92sqjuh';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
 </html>
