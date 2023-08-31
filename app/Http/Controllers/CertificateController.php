@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Employer;
 use Illuminate\Http\Request;
+use App\Models\Signature;
 
 class CertificateController extends Controller
 {
@@ -100,8 +101,10 @@ public function displayCertificateDetailsPage($certificateId)
     // Generate a QR code for the data 'NSITF'
     $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
 
+    $signature = Signature::with('user')->find(1);
 
-    return view('certificates.detailspage', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
+
+    return view('certificates.detailspage', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode', 'signature'));
 
 }
 
