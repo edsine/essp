@@ -21,7 +21,7 @@ class PaymentController extends Controller
     public function index()
     {
         //year to start ECS payment count: 2023- system deployment OR year employer registered
-        $initial_year = 2023;
+        $initial_year = 2022;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
 
         //get total employees for this employer
@@ -39,6 +39,7 @@ class PaymentController extends Controller
         $employer_minimum_payment = auth()->user()->business_area == "Public / Private Limited Company" ? 100000 : 50000;
         $payment_due = $payment_due > $employer_minimum_payment ? $payment_due : $employer_minimum_payment;
 
+        $paid_months = 0;
         --$start_year;
         //check if user has a pending ECS payments from date of registration
         do {
@@ -47,13 +48,30 @@ class PaymentController extends Controller
                 ->where('payment_type', 4) //->where('payment_status', 0)
                 ->whereRaw('contribution_year = ' . $start_year) //date('Y'))
                 ->get()->last();
+            //if there is a pending payment
             if ($pending_payment && $pending_payment->payment_status == 0) break;
-        } while ($pending_payment != null && $start_year<date('Y'));
+
+            $paid_months = 0;
+
+            //if monthly, check if all months for the year have been paid
+            if ($pending_payment && $pending_payment->contribution_period == 'Monthly') {
+                //get all rows for the current year and aggregate the months
+                $paid_months = auth()->user()->payments()
+                    ->where('payment_type', 4)
+                    ->whereRaw('contribution_year = ' . $start_year) //date('Y'))
+                    ->where('contribution_period', 'Monthly')
+                    ->sum('contribution_months');
+                if ($paid_months < 12) break;
+                else $paid_months = 0;
+                //if 12 proceed
+                //else all to pay remaining months
+            }
+        } while ($pending_payment != null && $start_year < date('Y'));
 
         //fetch all payments
         $payments = auth()->user()->payments;
 
-        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year'));
+        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year', 'paid_months'));
     }
 
     /**

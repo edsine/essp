@@ -51,7 +51,7 @@
                                 <div class="data">
                                     <div class="data-group">
                                         <div class="form-group w-100">
-                                            @if (!$pending_payment)
+                                            @if (!$pending_payment || $paid_months != 0)
                                                 {{-- <div class="form-group"> --}}
                                                 <form method="POST" action="{{ route('payment.remita') }}">
                                                     @csrf
@@ -72,7 +72,9 @@
                                                             <label for="contribution_period">Contribution Period:</label>
                                                             <select name="contribution_period" id="contribution_period"
                                                                 class="form-select">
-                                                                <option>Annually</option>
+                                                                @if ($paid_months == 0)
+                                                                    <option>Annually</option>
+                                                                @endif
                                                                 <option>Monthly</option>
                                                             </select>
 
@@ -80,7 +82,7 @@
                                                                 <label for="number_of_months">Number of months</label>
                                                                 <select name="number_of_months" id="number_of_months"
                                                                     class="form-select">
-                                                                    @for ($i = 1; $i <= 12; $i++)
+                                                                    @for ($i = 1; $i <= 12-$paid_months; $i++)
                                                                         <option>{{ $i }}</option>
                                                                     @endfor
                                                                 </select>
@@ -105,7 +107,8 @@
                                                             <input type="hidden" name="amount" id="amount"
                                                                 value="{{ $payment_due }}">
 
-                                                            <label for=""><b>Note: </b>Only one contribution type can be
+                                                            <label for=""><b>Note: </b>Only one contribution type
+                                                                can be
                                                                 used for a selected year.</label>
                                                         </div>
                                                     </div>
@@ -150,7 +153,9 @@
                                                                     of <span
                                                                         class="fw-bold">{{ $pending_payment->employees }}</span>
                                                                     Employees with the amount <span
-                                                                        class="fw-bold">&#8358;{{ number_format($pending_payment->amount, 2) }}</span>
+                                                                        class="fw-bold">&#8358;{{ number_format(\App\Models\Payment::where('payment_type', 4)
+                                                                        ->whereRaw('contribution_year = ' . $pending_payment->contribution_year)
+                                                                        ->sum('amount'), 2) }}</span>
                                                                     has been PAID!</label>
                                                             </p>
                                                         </div>
@@ -327,7 +332,7 @@
                             maximumFractionDigits: 2
                         });
                     $('#contribution_amount').html('&#8358;' + current_due);
-                    $('#amount').val(current_due.replace(',',''));
+                    $('#amount').val(current_due.replace(',', ''));
                 } else {
                     $('#nom_div').addClass('d-none');
                     $('#contribution_amount').html('&#8358;' + annual_pay.toLocaleString(

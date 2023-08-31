@@ -16,7 +16,7 @@
             <tbody>
                 @foreach ($payments as $payment)
                     <tr>
-                        <td>{{ $payment->payment_type == 1 ? 'ECS Registration Fee' : ($payment->payment_type == 2 ? 'Certificate Request' : 'ECS Payment '.$payment->contribution_year) }}
+                        <td>{{ $payment->payment_type == 1 ? 'ECS Registration Fee' : ($payment->payment_type == 2 ? 'Certificate Request' : 'ECS Payment '.$payment->contribution_year . ($payment->contribution_period=='Monthly' ? ' ('.$payment->contribution_months.' months)' : '')) }}
                         </td>
                         <td>{{ $payment->invoice_number }}</td>
                         <td>{{ $payment->rrr }}</td>
