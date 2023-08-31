@@ -77,7 +77,7 @@ Route::middleware(['auth'])->group(function () {
     //Route::get('certificate/verify', 'App\Http\Controllers\CertificateController@verifyCertificate')->name('certificate.verify');
     //Route::get('verification', 'App\Http\Controllers\CertificateController@verification')->name('verification');
 
-    
+
 
     Route::resource('certificate', App\Http\Controllers\CertificateController::class);
 
@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('claim/accident', App\Http\Controllers\AccidentClaimController::class);
     Route::resource('claim/death', App\Http\Controllers\DeathClaimController::class);
     Route::resource('claim/disease', App\Http\Controllers\DiseaseClaimController::class);
-    
+
 });
 
 Route::get('/notification', function () {

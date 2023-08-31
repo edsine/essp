@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Payments')
+@section('title', 'Certificates')
 
 
 @push('styles')

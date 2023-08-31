@@ -40,6 +40,7 @@ class OTPNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->subject('NSITF ESSP: OTP')
             ->line('Hi ' . $this->employer->company_name)
             ->line('Your OTP is: ' . $this->pin)
             ->line('Do not share this pin with anyone.');

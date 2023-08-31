@@ -20,6 +20,10 @@ class PaymentController extends Controller
      */
     public function index()
     {
+        //year to start ECS payment count: 2023- system deployment OR year employer registered
+        $initial_year = 2023;
+        $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
+
         //get total employees for this employer
         $employees_count = auth()->user()->employees->count();
 
@@ -32,17 +36,24 @@ class PaymentController extends Controller
         //calculate current payment due
         $payment_due = auth()->user()->employees()->sum('monthly_remuneration');
         $payment_due = (1 / 100) * $payment_due * 12; //for a year
-        $payment_due = $payment_due > 100000 ? $payment_due : 100000;
+        $employer_minimum_payment = auth()->user()->business_area == "Public / Private Limited Company" ? 100000 : 50000;
+        $payment_due = $payment_due > $employer_minimum_payment ? $payment_due : $employer_minimum_payment;
 
-        $pending_payment = auth()->user()->payments()
-            ->where('payment_type', 4) //->where('payment_status', 0)
-            ->whereRaw('YEAR(invoice_generated_at) = ' . date('Y'))
-            ->get()->last();
+        --$start_year;
+        //check if user has a pending ECS payments from date of registration
+        do {
+            ++$start_year;
+            $pending_payment = auth()->user()->payments()
+                ->where('payment_type', 4) //->where('payment_status', 0)
+                ->whereRaw('contribution_year = ' . $start_year) //date('Y'))
+                ->get()->last();
+            if ($pending_payment && $pending_payment->payment_status == 0) break;
+        } while ($pending_payment != null && $start_year<date('Y'));
 
         //fetch all payments
         $payments = auth()->user()->payments;
 
-        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment'));
+        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year'));
     }
 
     /**
@@ -95,6 +106,16 @@ class PaymentController extends Controller
 
     public function generateRemita(Request $request)
     {
+        //validation only for ECS payments
+        $request->validate([
+            'year' => 'required_with:contribution_period',
+            'number_of_months' => 'required_if:contribution_period,Monthly|numeric',
+            'contribution_period' => 'required_with:year|string',
+            'amount' => 'required|numeric',
+            'payment_type' => 'required|numeric',
+            'employees' => 'required_with:year,contribution_period',
+        ]);
+
         //generate invoice number
         $lastInvoice = Payment::get()->last();
         if ($lastInvoice) {
@@ -172,13 +193,18 @@ class PaymentController extends Controller
             //add record to transactions table
             $payment = auth()->user()->payments()->create([
                 'payment_type' => $request->payment_type,
-                'payment_employee' => $request->employee,
+                'payment_employee' => $request->employees,
                 'rrr' => $data['RRR'],
                 'invoice_number' => $lastInvoice,
                 'invoice_generated_at' => date('Y-m-d H:i:s'),
                 'invoice_duration' => date('Y-m-d', strtotime('+1 year')),
                 'payment_status' => 0,
                 'amount' => $amount,
+                //below for ECS payments
+                'contribution_year' => $request->year ?? null,
+                'contribution_period' => $request->contribution_period ?? null,
+                'contribution_months' => $request->number_of_months ?? null,
+                'employees' => $request->employees,
             ]);
 
             //for certificate request, link payment to certificates
@@ -294,9 +320,9 @@ class PaymentController extends Controller
 
     public function download(Request $request, Payment $payment)
     {
-        $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
-        ->loadView('payments.invoice', ['pid' => $payment->id])
-        ->setPaper('a4', 'portrait');
+        $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans',])
+            ->loadView('payments.invoice', ['pid' => $payment->id])
+            ->setPaper('a4', 'portrait');
 
         return $pdf->download('invoice.pdf');
     }
