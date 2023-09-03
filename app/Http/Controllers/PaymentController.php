@@ -21,7 +21,8 @@ class PaymentController extends Controller
     public function index()
     {
         //year to start ECS payment count: 2023- system deployment OR year employer registered
-        $initial_year = 2022;
+        $cac = date('Y', strtotime(auth()->user()->cac_reg_year));
+        $initial_year = date('Y') - $cac > 2 ? date('Y') - 2 : $cac;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
 
         //get total employees for this employer

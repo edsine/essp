@@ -20,6 +20,40 @@ class CertificateController extends Controller
      */
     public function index()
     {
+        //if there is/are no completed ECS payments yearly payments
+        //then employer cannot generate certificate
+        $initial_year = 2023;
+        $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
+
+        $certificate_years = [];
+        --$start_year;
+        //check if employer has ECS payments since registration or start of system
+        do {
+            ++$start_year;
+            $payment = auth()->user()->payments()
+                ->where('payment_type', 4)
+                ->where('payment_status', 1)
+                ->whereRaw('contribution_year = ' . $start_year)
+                ->selectRaw("SUM(contribution_months) AS contribution_months, contribution_period")
+                ->groupBy(['contribution_year', 'contribution_period'])
+                ->whereNotExists(function ($query) use ($start_year) {
+                    $query->select(DB::raw(1))
+                        ->from('certificates')
+                        ->whereRaw('application_year = ' . $start_year);
+                })
+                ->first();
+
+            //Employer can only generate certificates for years with completed payments
+            //and where certificate has not already been generated
+            if (
+                ($payment && $payment->contribution_period == 'Annually') ||
+                ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
+            ) {
+                $certificate_years[] = $start_year;
+            }
+        } while ($start_year < date('Y'));
+
+
         $certificates = auth()->user()->certificates;
 
         if ($certificates->count() > 0)
@@ -27,7 +61,7 @@ class CertificateController extends Controller
         else $pending =  null;
 
         $amount = 50000;
-        return view('certificates.index', compact('certificates', 'amount', 'pending'));
+        return view('certificates.index', compact('certificates', 'amount', 'pending', 'certificate_years'));
     }
 
 

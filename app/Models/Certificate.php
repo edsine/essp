@@ -12,7 +12,7 @@ class Certificate extends Model
 
     protected $fillable = [
         'employer_id', 'payment_fee', 'processing_status', 'payment_status',
-        'branch_id', 'application_letter', 'payment_id',
+        'branch_id', 'application_letter', 'payment_id', 'application_year',
     ];
 
     public function payment()

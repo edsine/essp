@@ -45,32 +45,91 @@
                 <div class="preview-block mt-3">
                     <div class="row gy-4">
                         @if ($certificates->count() < 1 || $pending->payment_status == 1)
-                            <div class="col-lg-6 col-sm-6">
-                                <form action="{{ route('certificate.store') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label class="form-label" for="application_letter">Upload your application letter
-                                            below &#8358;50,000
-                                        </label>
-                                        <div class="form-control-wrap">
-                                            <div class="form-file">
-                                                <input type="file" multiple class="form-file-input"
-                                                    name="application_letter" id="application_letter">
-                                                <label class="form-file-label" for="application_letter">Choose file</label>
+                            <div class="col-lg-6 col-sm-6 w-75">
+
+                                @if (count($certificate_years) > 0)
+                                    <form action="{{ route('certificate.store') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label class="form-label" for="application_letter">Upload your application
+                                                letter
+                                                below
+                                            </label>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="application_year">Application Year</label>
+                                                        <select name="application_year" id="application_year"
+                                                            class="form-select">
+                                                            @foreach ($certificate_years as $year)
+                                                                <option @selected($year == date('Y'))>{{ $year }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <input type="hidden" name="payment_fee" id="payment_fee"
+                                                        value="50000">
+                                                    <input type="hidden" name="branch_id" id="branch_id"
+                                                        value="{{ auth()->user()->branch_id }}">
+
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-lg btn-primary"><em
+                                                                class="icon ni ni-upload-cloud me-2"></em> Upload
+                                                            Certificate</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="application_letter">Upload Application Letter</label>
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-file">
+                                                                <input type="file" multiple class="form-file-input"
+                                                                    name="application_letter" id="application_letter">
+                                                                <label class="form-file-label"
+                                                                    for="application_letter">Choose
+                                                                    file</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <p>
+                                                        <b>Note:</b> This application will cost you: <span
+                                                            class="fs-3">&#8358;50,000</span>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
+                                @else
+                                    {{--  --}}
+                                    @php
+                                        $payments = auth()
+                                            ->user()
+                                            ->payments()
+                                            ->where('payment_type', 4)
+                                            ->where('payment_status', 1)
+                                            ->selectRaw('SUM(contribution_months) AS contribution_months, contribution_period')
+                                            ->groupBy(['contribution_year', 'contribution_period'])
+                                            ->count();
+                                    @endphp
 
-                                    <input type="hidden" name="payment_fee" id="payment_fee" value="50000">
-                                    <input type="hidden" name="branch_id" id="branch_id"
-                                        value="{{ auth()->user()->branch_id }}">
+                                    @if ($payments > 0)
+                                        <div class="form-group">
+                                            <label for="" class="">You do not have any outstanding
+                                                certificates to generate.</label>
+                                        </div>
+                                    @else
+                                        <div class="form-group">
+                                            <label for="" class="">You have not made any ECS
+                                                Payments.</label>
+                                                <br/>
+                                                <a class="btn btn-primary me-n1" href="{{route('payment.index')}}">Make ECS Payments</a>
+                                        </div>
+                                    @endif
+                                @endif
 
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-lg btn-primary"><em
-                                                class="icon ni ni-upload-cloud me-2"></em> Upload Certificate</button>
-                                    </div>
-                                </form>
                             </div>
                         @else
                             @if ($pending && $pending->payment == null)
