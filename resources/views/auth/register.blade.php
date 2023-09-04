@@ -44,7 +44,7 @@
                                     <div class="step-item">
                                         <div class="step-text">
                                             <div class="lead-text">Employer Status</div>
-                                            <div class="sub-text">New or Old Employer</div>
+                                            <div class="sub-text">Registered or Unregistered</div>
                                         </div>
                                     </div>
                                 </li>
@@ -102,7 +102,7 @@
                                                             <em
                                                                 class="icon icon-circle icon-circle-lg bg-teal ni ni-briefcase"></em>
                                                             {{-- <span class="lead-text mb-1 mt-3">New Employer</span> --}}
-                                                            <span class="sub-text">I am a new Employer.</span>
+                                                            <span class="sub-text">Unregistered Employer.</span>
                                                         </span>
                                                     </label>
                                                 </div>
@@ -117,7 +117,7 @@
                                                             <em
                                                                 class="icon icon-circle icon-circle-lg bg-orange ni ni-briefcase"></em>
                                                             {{-- <span class="lead-text mb-1 mt-3">Old Employer</span> --}}
-                                                            <span class="sub-text">I am a registered Employer.</span>
+                                                            <span class="sub-text">Registered Employer.</span>
                                                         </span>
                                                     </label>
                                                 </div>
@@ -139,7 +139,7 @@
                                             <div id="alert-div">
                                                 <div class="alert alert-info">
                                                     <strong>INFO:</strong>
-                                                    <span>Provide and ECS Number to prepopulate your details!</span>
+                                                    <span>Provide an ECS Number to prepopulate your details!</span>
                                                 </div>
                                             </div>
                                         </div>
