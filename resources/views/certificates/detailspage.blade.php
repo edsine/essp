@@ -78,13 +78,40 @@
                     </div>
                     <!-- the barcode area -->
                 {{-- <svg id="barcode"></svg> --}}
-                {!! $qrCode !!}
+                <div class="nav1">
+                    <div class="nav2">
+                     {!! $qrCode !!}
+                    </div>
+                    @if (isset($signature))
+                     <div class="nav2 navv">
+                        <img src="{{ $signature->signature_data }}" style="width: 200px;height: auto;"/>
+                        <p style="margin-top: 0px;padding-top:0px;"><b>{{ $signature->user->first_name .' '.$signature->user->middle_name.' '.$signature->user->last_name }}</b></p>
+                     </div>
+                         
+                     @endif
+                     </div>
                 </div>
             </div>
         </div> <div style="text-align: center;margin:auto;">
     </div>
     </div>
-    
+    <style>
+        .nav1 {
+  text-align: left; 
+  padding: 0;
+  margin: 0;
+}
+
+.nav1 .navv{
+  text-align: right; 
+}
+
+.nav1 .nav2 {
+  display: inline-block;
+  font-size: 20px;
+  padding: 20px;
+}
+    </style>
     {{-- <script>
         
         JsBarcode('#barcode', 'NSITF');
