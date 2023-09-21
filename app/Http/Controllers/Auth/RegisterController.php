@@ -96,6 +96,7 @@ class RegisterController extends Controller
     {
         unset($data['password_confirmation']);
         $data['user_id'] = 1;
+        $password = $data['password'];
         $data['password'] = Hash::make($data['password']);
 
         if ($data['employer_status'] == "new") {
@@ -134,10 +135,10 @@ class RegisterController extends Controller
         $path = "employer/";
          $title = str_replace(' ', '', $data['company_name']);
          $fileName = $title . 'v1' . rand() . '.' . $file->getClientOriginalExtension();
-     
+
          // Upload the file to the S3 bucket
          $documentUrl = Storage::disk('s3')->putFileAs($path, $file, $fileName); */
- 
+
          $data['certificate_of_incorporation'] =  "0";//$documentUrl;
 
         $data['account_officer_id'] = $randomUserId;
@@ -147,7 +148,7 @@ class RegisterController extends Controller
         //send notification
         //$employer->notify(new EmployerRegistrationNotification($employer));
         //send email
-        //Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $data['password']));
+        Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
 
         return $employer;
     }

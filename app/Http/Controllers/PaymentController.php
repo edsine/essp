@@ -20,6 +20,11 @@ class PaymentController extends Controller
      */
     public function index()
     {
+        //year to start ECS payment count: 2023- system deployment OR year employer registered
+        $cac = date('Y', strtotime(auth()->user()->cac_reg_year));
+        $initial_year = date('Y') - $cac > 2 ? date('Y') - 2 : $cac;
+        $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
+
         //get total employees for this employer
         $employees_count = auth()->user()->employees->count();
 
@@ -32,17 +37,42 @@ class PaymentController extends Controller
         //calculate current payment due
         $payment_due = auth()->user()->employees()->sum('monthly_remuneration');
         $payment_due = (1 / 100) * $payment_due * 12; //for a year
-        $payment_due = $payment_due > 100000 ? $payment_due : 100000;
+        $employer_minimum_payment = auth()->user()->business_area == "Public / Private Limited Company" ? 100000 : 50000;
+        $payment_due = $payment_due > $employer_minimum_payment ? $payment_due : $employer_minimum_payment;
 
-        $pending_payment = auth()->user()->payments()
-            ->where('payment_type', 4) //->where('payment_status', 0)
-            ->whereRaw('YEAR(invoice_generated_at) = ' . date('Y'))
-            ->get()->last();
+        $paid_months = 0;
+        --$start_year;
+        //check if user has a pending ECS payments from date of registration
+        do {
+            ++$start_year;
+            $pending_payment = auth()->user()->payments()
+                ->where('payment_type', 4) //->where('payment_status', 0)
+                ->whereRaw('contribution_year = ' . $start_year) //date('Y'))
+                ->get()->last();
+            //if there is a pending payment
+            if ($pending_payment && $pending_payment->payment_status == 0) break;
+
+            $paid_months = 0;
+
+            //if monthly, check if all months for the year have been paid
+            if ($pending_payment && $pending_payment->contribution_period == 'Monthly') {
+                //get all rows for the current year and aggregate the months
+                $paid_months = auth()->user()->payments()
+                    ->where('payment_type', 4)
+                    ->whereRaw('contribution_year = ' . $start_year) //date('Y'))
+                    ->where('contribution_period', 'Monthly')
+                    ->sum('contribution_months');
+                if ($paid_months < 12) break;
+                else $paid_months = 0;
+                //if 12 proceed
+                //else all to pay remaining months
+            }
+        } while ($pending_payment != null && $start_year < date('Y'));
 
         //fetch all payments
         $payments = auth()->user()->payments;
 
-        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment'));
+        return view('payments.index', compact('payments', 'employees_count', 'year_total_payment', 'payment_due', 'pending_payment', 'start_year', 'paid_months'));
     }
 
     /**
@@ -95,6 +125,16 @@ class PaymentController extends Controller
 
     public function generateRemita(Request $request)
     {
+        //validation only for ECS payments
+        $request->validate([
+            'year' => 'required_with:contribution_period',
+            'number_of_months' => 'required_if:contribution_period,Monthly|numeric',
+            'contribution_period' => 'required_with:year|string',
+            'amount' => 'required|numeric',
+            'payment_type' => 'required|numeric',
+            'employees' => 'required_with:year,contribution_period',
+        ]);
+
         //generate invoice number
         $lastInvoice = Payment::get()->last();
         if ($lastInvoice) {
@@ -105,12 +145,14 @@ class PaymentController extends Controller
             $lastInvoice = "NSITF-0000001";
         }
 
+        $serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 4 ? env('ECS_CONTRIBUTION') : env('ECS_CERTIFICATE'));
+
         $amount = $request->amount;
         $orderId = round(microtime(true) * 1000);
-        $apiHash = hash('sha512', env('REMITA_MERCHANT_ID') . env('REMITA_SERVICE_TYPE_ID') . $orderId . $amount . env('REMITA_API_KEY'));
+        $apiHash = hash('sha512', env('REMITA_MERCHANT_ID') . $serviceTypeId . $orderId . $amount . env('REMITA_API_KEY'));
 
         $fields = [
-            "serviceTypeId" => env('REMITA_SERVICE_TYPE_ID'),
+            "serviceTypeId" => $serviceTypeId,
             "amount" => $amount,
             "orderId" => $orderId,
             "payerName" => auth()->user()->company_name,
@@ -172,13 +214,18 @@ class PaymentController extends Controller
             //add record to transactions table
             $payment = auth()->user()->payments()->create([
                 'payment_type' => $request->payment_type,
-                'payment_employee' => $request->employee,
+                'payment_employee' => $request->employees,
                 'rrr' => $data['RRR'],
                 'invoice_number' => $lastInvoice,
                 'invoice_generated_at' => date('Y-m-d H:i:s'),
                 'invoice_duration' => date('Y-m-d', strtotime('+1 year')),
                 'payment_status' => 0,
                 'amount' => $amount,
+                //below for ECS payments
+                'contribution_year' => $request->year ?? null,
+                'contribution_period' => $request->contribution_period ?? null,
+                'contribution_months' => $request->number_of_months ?? null,
+                'employees' => $request->employees,
             ]);
 
             //for certificate request, link payment to certificates
@@ -190,7 +237,7 @@ class PaymentController extends Controller
 
             if ($request->payment_type == 1)
                 return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
-            //return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
+            return redirect()->back()->with('success', 'Payment Reference Generated! RRR = ' . $data['RRR']);
         } else {
             return redirect()->back()->with('error', 'Problems encountered in generating RRR');
         }
@@ -294,9 +341,9 @@ class PaymentController extends Controller
 
     public function download(Request $request, Payment $payment)
     {
-        $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans', ])
-        ->loadView('payments.invoice', ['pid' => $payment->id])
-        ->setPaper('a4', 'portrait');
+        $pdf = PDF::setOptions(['dpi' => 150, 'defaultFont' => 'DejaVu Sans',])
+            ->loadView('payments.invoice', ['pid' => $payment->id])
+            ->setPaper('a4', 'portrait');
 
         return $pdf->download('invoice.pdf');
     }

@@ -26,6 +26,7 @@ class StoreCertificateRequest extends FormRequest
             'payment_fee' => 'required|numeric',
             'branch_id' => 'required|exists:branches,id',
             'application_letter' => 'required|file|mimes:pdf,jpg,png,jpeg|max:5120',
+            'application_year' => 'required',
         ];
     }
 }

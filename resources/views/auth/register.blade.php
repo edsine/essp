@@ -44,7 +44,7 @@
                                     <div class="step-item">
                                         <div class="step-text">
                                             <div class="lead-text">Employer Status</div>
-                                            <div class="sub-text">New or Old Employer</div>
+                                            <div class="sub-text">Registered or Unregistered</div>
                                         </div>
                                     </div>
                                 </li>
@@ -102,7 +102,7 @@
                                                             <em
                                                                 class="icon icon-circle icon-circle-lg bg-teal ni ni-briefcase"></em>
                                                             {{-- <span class="lead-text mb-1 mt-3">New Employer</span> --}}
-                                                            <span class="sub-text">I am a new Employer.</span>
+                                                            <span class="sub-text">Unregistered Employer.</span>
                                                         </span>
                                                     </label>
                                                 </div>
@@ -117,7 +117,7 @@
                                                             <em
                                                                 class="icon icon-circle icon-circle-lg bg-orange ni ni-briefcase"></em>
                                                             {{-- <span class="lead-text mb-1 mt-3">Old Employer</span> --}}
-                                                            <span class="sub-text">I am an old Employer.</span>
+                                                            <span class="sub-text">Registered Employer.</span>
                                                         </span>
                                                     </label>
                                                 </div>
@@ -139,7 +139,7 @@
                                             <div id="alert-div">
                                                 <div class="alert alert-info">
                                                     <strong>INFO:</strong>
-                                                    <span>Provide and ECS Number to prepopulate your details!</span>
+                                                    <span>Provide an ECS Number to prepopulate your details!</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -2842,8 +2842,8 @@
             //IF OLD OR NEW EMPLOYERR
             $('input[name="employer_status"]').change(function() {
                 if ($('input[name="employer_status"]:checked').val() == 'new') {
-                    $('.otp-div').addClass('d-none');//hide otp div
-                    $('.will-hide').addClass('d-none');//hide search ecs div
+                    $('.otp-div').addClass('d-none'); //hide otp div
+                    $('.will-hide').addClass('d-none'); //hide search ecs div
                     $('#ecs_number').val('');
                     $('.step-next').show();
                 } else {
@@ -2985,10 +2985,10 @@
                     $('#otp').prop('disabled', false);
 
                     if (response.status == 'success') {
-                        $('.otp-div').addClass('d-none');//remove opt row
-                        $('.step-next').show();//show continue button
+                        $('.otp-div').addClass('d-none'); //remove opt row
+                        $('.step-next').show(); //show continue button
                     } else {
-                        $('.step-next').hide();//hide continue button
+                        $('.step-next').hide(); //hide continue button
                     }
                     Swal.fire({
                         title: response.message,
@@ -2999,4 +2999,20 @@
             })
         });
     </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/64ef0da4a91e863a5c10a087/1h92sqjuh';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 @endpush
