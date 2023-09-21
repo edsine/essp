@@ -145,7 +145,7 @@ class PaymentController extends Controller
             $lastInvoice = "NSITF-0000001";
         }
 
-        $serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 2 ? env('ECS_CERTIFICATE') : env('ECS_CONTRIBUTION'));
+        $serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 4 ? env('ECS_CONTRIBUTION') : env('ECS_CERTIFICATE'));
 
         $amount = $request->amount;
         $orderId = round(microtime(true) * 1000);
