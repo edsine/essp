@@ -145,12 +145,14 @@ class PaymentController extends Controller
             $lastInvoice = "NSITF-0000001";
         }
 
+        $serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 2 ? env('ECS_CERTIFICATE') : env('ECS_CONTRIBUTION'));
+
         $amount = $request->amount;
         $orderId = round(microtime(true) * 1000);
-        $apiHash = hash('sha512', env('REMITA_MERCHANT_ID') . env('REMITA_SERVICE_TYPE_ID') . $orderId . $amount . env('REMITA_API_KEY'));
+        $apiHash = hash('sha512', env('REMITA_MERCHANT_ID') . $serviceTypeId . $orderId . $amount . env('REMITA_API_KEY'));
 
         $fields = [
-            "serviceTypeId" => env('REMITA_SERVICE_TYPE_ID'),
+            "serviceTypeId" => $serviceTypeId,
             "amount" => $amount,
             "orderId" => $orderId,
             "payerName" => auth()->user()->company_name,
