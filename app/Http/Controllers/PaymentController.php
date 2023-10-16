@@ -145,8 +145,8 @@ class PaymentController extends Controller
             $lastInvoice = "NSITF-0000001";
         }
 
-        $serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 4 ? env('ECS_CONTRIBUTION') : env('ECS_CERTIFICATE'));
-
+        //$serviceTypeId = $request->payment_type ==  1 ? env('ECS_REGISTRATION') : ($request->payment_type == 4 ? env('ECS_CONTRIBUTION') : env('ECS_CERTIFICATE'));
+        $serviceTypeId = "4430731";
         $amount = $request->amount;
         $orderId = round(microtime(true) * 1000);
         $apiHash = hash('sha512', env('REMITA_MERCHANT_ID') . $serviceTypeId . $orderId . $amount . env('REMITA_API_KEY'));
@@ -209,7 +209,9 @@ class PaymentController extends Controller
         $newLength = strlen($result);
         $result = substr($result, 0, $newLength - 1);
         $data = json_decode($result, true);
-
+        //dd($orderId);
+// dd($fields);
+// exit();
         if ($data['statuscode'] == "025" && $data['RRR']) {
             //add record to transactions table
             $payment = auth()->user()->payments()->create([
