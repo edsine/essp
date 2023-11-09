@@ -122,7 +122,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <label class="form-label">Company State</label>
-                                        <span class="form-control">{{ auth()->user()->company_state }}</span>
+                                        <span class="form-control">{{ auth()->user()->state->name }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                 <div class="form-group">
                                     <div class="form-control-wrap">
                                         <label class="form-label">Company LGA</label>
-                                        <span class="form-control">{{ auth()->user()->company_localgovt }}</span>
+                                        <span class="form-control">{{ auth()->user()->lga->name }}</span>
                                     </div>
                                 </div>
                             </div>
