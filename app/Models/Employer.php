@@ -107,4 +107,8 @@ class Employer extends Authenticatable
         // Return email address only...
         return $this->company_email;
     }
+
+    public function branch(){
+        return $this->belongsTo(Branch::class);
+    }
 }

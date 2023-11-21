@@ -21,9 +21,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        //if there is/are no completed ECS payments yearly payments
-        //then employer cannot generate certificate
-        $initial_year = 2023;
+/*         $initial_year = 2023;
         $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
 
         $certificate_years = [];
@@ -63,6 +61,58 @@ class CertificateController extends Controller
 
         $amount = 50000;
         return view('certificates.index', compact('certificates', 'amount', 'pending', 'certificate_years'));
+ */
+        //if there is/are no completed ECS payments yearly payments
+        //then employer cannot generate certificate
+        $initial_year = 2023;
+        $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
+        
+        $certificate_years = [];
+        --$start_year;
+
+        do {
+            ++$start_year;
+            $payment = DB::table('payments')
+    ->select(DB::raw('SUM(contribution_months) AS contribution_months, contribution_period, contribution_year'))
+    ->where('payment_type', 4)
+    ->where('payment_status', 1)
+    ->where('employer_id', auth()->user()->id)
+    ->where('contribution_year', $start_year)
+    ->groupBy(['contribution_year', 'contribution_period'])/* 
+    ->whereNotExists(function ($query) use ($start_year) {
+        $query->select(DB::raw(1))
+            ->from('certificates')
+            ->whereRaw('application_year = ' . $start_year);
+    }) */
+    ->first();
+
+    $certificate = DB::table('certificates')->where('employer_id', auth()->user()->id)
+    ->whereRaw('application_year = ' . $start_year)->latest()->first();
+
+    if(!$certificate){
+if (
+    ($payment && $payment->contribution_period == 'Annually') ||
+    ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
+) {
+    $certificate_years[] = $start_year;
+}
+    }
+            //$certificate_years[] = $start_year;
+
+        } while ($start_year < date('Y'));
+
+        
+
+        $certificates = auth()->user()->certificates;
+
+        if ($certificates->count() > 0)
+            $pending = auth()->user()->certificates()->get()->last();
+        else $pending =  null;
+
+        $latestPayment = auth()->user()->payments()->latest()->first();
+
+        $amount = 50000;
+        return view('certificates.index', compact('certificates', 'amount', 'pending', 'certificate_years', 'latestPayment'));
     }
 
 
@@ -73,6 +123,42 @@ class CertificateController extends Controller
     public function create()
     {
         //
+        $initial_year = 2023;
+        $start_year = date('Y', strtotime(auth()->user()->created_at)) > $initial_year ? date('Y', strtotime(auth()->user()->created_at)) : $initial_year;
+        
+        $certificate_years = [];
+        --$start_year;
+        
+        do {
+            ++$start_year;
+        
+            $payment = auth()->user()->payments()
+    ->where('payment_type', 4)
+    ->where('payment_status', 1)
+    ->where('contribution_year', $start_year)
+    ->selectRaw("SUM(contribution_months) AS contribution_months, contribution_period, contribution_year")
+    ->groupBy(['contribution_year', 'contribution_period'])
+    ->first();
+
+    $certificate = DB::table('certificates')->where('employer_id', auth()->user()->id)
+    ->whereRaw('application_year = ' . $start_year)->latest()->first();
+
+    if(!$certificate){
+if (
+    ($payment && $payment->contribution_period == 'Annually') ||
+    ($payment && $payment->contribution_period == 'Monthly' && $payment->contribution_months == 12)
+) {
+    $certificate_years[] = $start_year;
+}
+    }
+            
+            //$certificate_years[] = $start_year;
+
+        } while ($start_year < date('Y'));
+
+
+       // dd($payment->contribution_period);
+        
     }
 
     /**
