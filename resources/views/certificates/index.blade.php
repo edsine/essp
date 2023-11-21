@@ -199,7 +199,7 @@
                         <tr>
                             <th>Amount</th>
                             <th>Payment Status</th>
-                            {{-- <th>Processing Status</th> --}}
+                            <th>Processing Status</th>
                             <th>Download Certificate</th>
                             <th>Manage</th>
                         </tr>
@@ -211,9 +211,9 @@
                                 <td><span
                                         class="tb-status text-{{ $certificate->payment_status == 0 ? 'warning' : 'success' }}">{{ $certificate->payment_status == 0 ? 'NOT PAID' : 'PAID' }}</span>
                                 </td>
-                                {{-- <td><span
+                                <td><span
                                         class="tb-status text-{{ $certificate->processing_status == 0 ? 'warning' : 'success' }}">{{ $certificate->processing_status == 0 ? 'PENDING' : 'DONE' }}</span>
-                                </td> --}}
+                                </td>
                                 <td> {{-- @if ($certificate->processing_status == 1) --}}
                                     <a href="{{ route('certificate.details', ['certificateId' => $certificate->id]) }}">View Certificate Details</a> 
                                 {{-- @endif --}}
