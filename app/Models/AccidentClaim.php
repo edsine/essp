@@ -13,7 +13,7 @@ class AccidentClaim extends Model
     protected $fillable = [
         'employer_id', 'employee_id', 'accident_date', 'accident_time', 'accident_town',
         'accident_report_date', 'accident_report_time', 'employee_earning', 'employee_task',
-        'nature_of_injury', 'course_of_work', 'first_aid_given',
+        'nature_of_injury', 'course_of_work', 'first_aid_given', 'branch_id',
         'medical_last_name', 'medical_first_name', 'medical_practice_number', 'document', 'status',
     ];
 

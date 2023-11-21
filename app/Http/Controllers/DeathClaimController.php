@@ -33,6 +33,7 @@ class DeathClaimController extends Controller
     {
         $validated = $request->validated();
         $validated['document'] = request()->file('document')->store('claims_documents', 'public');
+        $validated['branch_id'] = auth()->user()->branch->id;
 
         auth()->user()->death_claims()->create($validated);
 

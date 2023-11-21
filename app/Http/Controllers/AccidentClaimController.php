@@ -33,8 +33,10 @@ class AccidentClaimController extends Controller
     {
         $validated = $request->validated();
         $validated['document'] = request()->file('document')->store('claims_documents', 'public');
+        $validated['branch_id'] = auth()->user()->branch->id;
 
         auth()->user()->accident_claims()->create($validated);
+        
 
         return redirect()->route('accident.index')->with('success', 'Accident claim created successfully!');
     }

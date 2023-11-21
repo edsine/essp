@@ -15,7 +15,7 @@ class DiseaseClaim extends Model
         'nature_of_injury', 'exposure_years', 'exposure_months', 'exposure_days', 'accident_report_date',
         'course_of_work', 'employment_years', 'employment_months', 'former_employers',
         'medical_last_name', 'medical_first_name', 'medical_practice_number',
-        'document', 'status',
+        'document', 'status', 'branch_id',
     ];
 
     public function employer()

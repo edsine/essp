@@ -15,7 +15,7 @@ class DeathClaim extends Model
         'incident_description', 'incident_date', 'incident_time',
         'employer_account_name', 'employer_account_number', 'employer_bank_name', 'employer_sort_code',
         'employee_account_name', 'employee_account_number', 'employee_bank_name', 'employee_sort_code',
-        'document', 'status',
+        'document', 'status', 'branch_id',
     ];
 
     public function employer()
