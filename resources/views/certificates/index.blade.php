@@ -214,9 +214,9 @@
                                 <td><span
                                         class="tb-status text-{{ $certificate->processing_status == 0 ? 'warning' : 'success' }}">{{ $certificate->processing_status == 0 ? 'PENDING' : 'DONE' }}</span>
                                 </td>
-                                <td> {{-- @if ($certificate->processing_status == 1) --}}
+                                <td> @if ($certificate->processing_status == 1)
                                     <a href="{{ route('certificate.details', ['certificateId' => $certificate->id]) }}">View Certificate Details</a> 
-                                {{-- @endif --}}
+                                @endif
                                     
                                 </td>
                                 <td>
