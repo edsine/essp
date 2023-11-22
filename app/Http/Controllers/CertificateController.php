@@ -239,9 +239,14 @@ if (
         // Generate a QR code for the data 'NSITF'
         //$qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
         $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
+        $signature = DB::table('signatures')
+    ->select('signatures.*', 'users.first_name', 'users.middle_name', 'users.last_name')
+    ->join('users', 'signatures.user_id', '=', 'users.id')
+    ->where('signatures.id', 1)
+    ->first();
 
 
-        return view('certificates.details', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
+        return view('certificates.details', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode', 'signature'));
     }
 
     public function displayCertificateDetailsPage($certificateId)
@@ -274,10 +279,16 @@ if (
         $currentYearExpiration = Carbon::createFromFormat('Y-m-d', $currentYearExpiration1)->format('F d, Y');
 
         // Generate a QR code for the data 'NSITF'
-        $qrCode = QrCode::generate('http://ebsnsitf.com.ng/');
+        $qrCode = QrCode::generate('http://ebs.nsitf.com.ng/');
+
+        $signature = DB::table('signatures')
+    ->select('signatures.*', 'users.first_name', 'users.middle_name', 'users.last_name')
+    ->join('users', 'signatures.user_id', '=', 'users.id')
+    ->where('signatures.id', 1)
+    ->first();
 
 
-        return view('certificates.detailspage', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode'));
+        return view('certificates.detailspage', compact('certificate', 'totalEmployees', 'paymentsAmount', 'currentYearExpiration', 'lastThreeYears', 'qrCode', 'signature'));
     }
 
     public function verification()
