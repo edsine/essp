@@ -85,8 +85,12 @@
                     @if (isset($signature))
                      <div class="nav2 navv">
                         <img src="{{ $signature->signature_data }}" style="width: 200px;height: auto;"/>
-                        <p style="margin-top: 0px;padding-top:0px;"><b>{{ $signature->user->first_name .' '.$signature->user->middle_name.' '.$signature->user->last_name }}</b></p>
-                     </div>
+                        <p style="margin-top: 0px;padding-top:0px;">
+                            <b>
+                                @if(!empty($signature->user))
+                            {{ $signature->user->first_name .' '.$signature->user->middle_name.' '.$signature->user->last_name }}
+                        @endif</b></p>
+                    </div>
                          
                      @endif
                      </div>
