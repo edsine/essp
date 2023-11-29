@@ -6,22 +6,22 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\DeathClaim;
+use App\Models\DiseaseClaim;
 
-class DeathClaimEmail extends Mailable
+class DiseaseClaimEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $deathClaim;
+    public $diseaseClaim;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(DeathClaim $deathClaim)
+    public function __construct(DiseaseClaim $diseaseClaim)
     {
-        $this->deathClaim = $deathClaim;
+        $this->diseaseClaim = $diseaseClaim;
     }
 
     /**
@@ -31,8 +31,8 @@ class DeathClaimEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Thank You for Your Death Claim Submission')
-                    ->view('emails.claims.death-claim');
+        return $this->subject('Thank You for Your Disease Claim Submission')
+        ->view('emails.claims.disease-claim');
     }
 }
 
