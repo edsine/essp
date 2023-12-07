@@ -9,6 +9,7 @@ use App\Models\AccidentClaim;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AccidentClaimEmail;
 use Illuminate\Support\Facades\DB;
+use App\Models\Request as ModelsRequest;
 
 class AccidentClaimController extends Controller
 {
@@ -75,6 +76,18 @@ class AccidentClaimController extends Controller
         
             // Remove duplicates
             $filteredEmailAddresses = array_unique($filteredEmailAddresses);
+
+            $approval_request = $accidentClaim->request()->create([
+                'staff_id' => auth()->user()->id,
+                'type_id' => 7,//for dta requests
+                'order' => 1,//order/step of the flow
+                'next_step' => 1,
+                'action_id' => 1,//action taken id 1= create
+            ]);
+            ModelsRequest::where('id', $approval_request->id)->update([
+                'next_step' => 1,
+                // Add other columns and their values as needed
+            ]);
         
             // Send thank you email to each filtered email address
             foreach ($filteredEmailAddresses as $email) {

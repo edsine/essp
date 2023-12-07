@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Approval;
 
 class DeathClaim extends Model
 {
     use HasFactory, SoftDeletes;
+    use Approval;
+    public $table = 'death_claims';
+    public $primarykey='id';
 
     protected $fillable = [
         'employer_id', 'employee_id', 'last_salary', 'monthly_contribution',

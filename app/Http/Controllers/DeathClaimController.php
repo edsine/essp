@@ -9,6 +9,7 @@ use App\Models\Employer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DeathClaimEmail;
 use Illuminate\Support\Facades\DB;
+use App\Models\Request as ModelsRequest;
 
 class DeathClaimController extends Controller
 {
@@ -76,6 +77,18 @@ class DeathClaimController extends Controller
             // Remove duplicates
             $filteredEmailAddresses = array_unique($filteredEmailAddresses);
         
+            $approval_request = $deathClaim->request()->create([
+                'staff_id' => auth()->user()->id,
+                'type_id' => 6,//for dta requests
+                'order' => 1,//order/step of the flow
+                'next_step' => 1,
+                'action_id' => 1,//action taken id 1= create
+            ]);
+            ModelsRequest::where('id', $approval_request->id)->update([
+                'next_step' => 1,
+                // Add other columns and their values as needed
+            ]);
+
             // Send thank you email to each filtered email address
             foreach ($filteredEmailAddresses as $email) {
                 Mail::to($email)->send(new DeathClaimEmail($deathClaim));
