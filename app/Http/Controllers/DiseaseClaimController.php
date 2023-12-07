@@ -75,6 +75,7 @@ class DiseaseClaimController extends Controller
             // Remove duplicates
             $filteredEmailAddresses = array_unique($filteredEmailAddresses);
         
+            
             // Send thank you email to each filtered email address
             foreach ($filteredEmailAddresses as $email) {
                 Mail::to($email)->send(new DiseaseClaimEmail($diseaseClaim));
