@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Approval;
 
 class DiseaseClaim extends Model
 {
     use HasFactory, SoftDeletes;
+    use Approval;
 
     protected $fillable = [
         'employer_id', 'employee_id', 'nature_of_work', 'nature_of_disease', 'date_disease_diagnosed',
