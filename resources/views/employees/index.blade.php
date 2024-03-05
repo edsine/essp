@@ -69,7 +69,7 @@
                                 <td>{{ $employee->last_name }} {{ $employee->first_name }} {{ $employee->middle_name }}</td>
                                 <td>{{ $employee->phone_number }}</td>
                                 <td>{{ $employee->job_title ?? '' }}</td>
-                                <td>&#8358;{{ number_format($employee->monthly_remuneration) }}</td>
+                                <td>&#8358;{{ number_format($employee->monthly_renumeration) }}</td>
                                 <td><span
                                         class="tb-status text-{{ $employee->status == 1 ? 'success' : 'danger' }}">{{ $employee->status == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}</span>
                                 </td>

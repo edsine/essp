@@ -24,6 +24,9 @@ Route::get('login', function () {
     //return view('welcome');
     return view('auth.login'); //Redirect on load to login or home
 });
+
+Route::get('mailer', [App\Http\Controllers\Auth\RegisterController::class, 'testMail'])->name('employer.mail');
+
 //LARAVEL DEFAULT
 Auth::routes();
 
