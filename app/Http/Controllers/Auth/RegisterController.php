@@ -142,15 +142,26 @@ class RegisterController extends Controller
          $data['certificate_of_incorporation'] =  "0";//$documentUrl;
 
         $data['account_officer_id'] = $randomUserId;
+        $data['status'] = 1;
+        $data['inspection_status'] = 0;
 
         $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
-
-        //send notification
-        //$employer->notify(new EmployerRegistrationNotification($employer));
-        //send email
-        Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
-
-        return $employer;
+        
+        try {
+            
+            // Send notification
+            // $employer->notify(new EmployerRegistrationNotification($employer));
+        
+            // Send email
+            Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, $password));
+        
+            return $employer;
+        } catch (\Exception $e) {
+            // Handle the exception
+            //return response()->json(['error' => 'Error occurred while processing.'], 500);
+            return $employer;
+        }
+        
     }
 
 
@@ -161,4 +172,19 @@ class RegisterController extends Controller
         $states = State::all();
         return view('auth.register', compact('branches', 'states'));
     }
+
+    public function testMail()
+    {
+        try {
+            $employer = Employer::find(26088);
+            Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, "12345678"));
+            
+            // No exceptions thrown, so mail sent successfully
+            echo "Mail sent successfully!";
+        } catch (\Exception $e) {
+            // Handle exceptions
+            echo "Error: ".$e->getMessage();
+        }
+    }
+    
 }

@@ -35,7 +35,7 @@ class PaymentController extends Controller
             ->sum('amount');
 
         //calculate current payment due
-        $payment_due = auth()->user()->employees()->sum('monthly_remuneration');
+        $payment_due = auth()->user()->employees()->sum('monthly_renumeration');
         $payment_due = (1 / 100) * $payment_due * 12; //for a year
         $employer_minimum_payment = auth()->user()->business_area == "Public / Private Limited Company" ? 100000 : 50000;
         $payment_due = $payment_due > $employer_minimum_payment ? $payment_due : $employer_minimum_payment;
@@ -216,7 +216,7 @@ class PaymentController extends Controller
             //add record to transactions table
             $payment = auth()->user()->payments()->create([
                 'payment_type' => $request->payment_type,
-                'payment_employee' => $request->employees,
+                //'payment_employee' => $request->employees,
                 'rrr' => $data['RRR'],
                 'invoice_number' => $lastInvoice,
                 'invoice_generated_at' => date('Y-m-d H:i:s'),
