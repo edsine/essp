@@ -220,8 +220,8 @@
                                     
                                 </td>
                                 <td>
-                                    <a href=""><span class="nk-menu-icon text-info"><em
-                                                class="icon ni ni-eye"></em></span></a>
+                                    {{-- <a href=""><span class="nk-menu-icon text-info"><em
+                                                class="icon ni ni-eye"></em></span></a> --}}
                                 </td>
                             </tr>
                         @endforeach

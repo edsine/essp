@@ -142,7 +142,7 @@ class RegisterController extends Controller
          $data['certificate_of_incorporation'] =  "0";//$documentUrl;
 
         $data['account_officer_id'] = $randomUserId;
-        $data['status'] = 1;
+        $data['status'] = 0;
         $data['inspection_status'] = 0;
 
         $employer = Employer::updateOrCreate(['ecs_number' => $data['ecs_number']], $data); //new employer
@@ -176,7 +176,7 @@ class RegisterController extends Controller
     public function testMail()
     {
         try {
-            $employer = Employer::find(26088);
+            $employer = Employer::find(26092);
             Mail::to($employer->company_email)->send(new EmployerRegisteredMail($employer, "12345678"));
             
             // No exceptions thrown, so mail sent successfully
