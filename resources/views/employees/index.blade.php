@@ -36,9 +36,10 @@
                                             <li><a href="{{ route('employee.createbulk') }}"><em
                                                         class="icon ni ni-upload-cloud"></em><span>Upload Bulk
                                                         Employees</span></a></li>
-                                            <li><a href="{{ Storage::url('employees.xlsx') }}"><em
-                                                        class="icon ni ni-download-cloud"></em><span>Bulk Employee
-                                                        Template</span></a></li>
+                                            <li><a
+                                                href="{{ url('employees.xlsx') }}" download><em
+                                                class="icon ni ni-download-cloud"></em><span>Bulk Employee
+                                                Template</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -58,7 +59,7 @@
                             <th>Full Name</th>
                             <th>Contact Phone</th>
                             <th>Job Title</th>
-                            <th>Monthly Remuneration</th>
+                            <th>Monthly Renumeration</th>
                             <th>Status</th>
                             <th>Manage</th>
                         </tr>

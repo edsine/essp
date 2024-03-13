@@ -199,10 +199,10 @@
                                                                                         Bulk
                                                                                         Employees</span></a></li>
                                                                             <li><a
-                                                                                    href="{{ Storage::url('employees.xlsx') }}"><em
-                                                                                        class="icon ni ni-download-cloud"></em><span>Bulk
-                                                                                        Employee
-                                                                                        Template</span></a></li>
+                                                                                href="{{ url('employees.xlsx') }}" download><em
+                                                                                class="icon ni ni-download-cloud"></em><span>Bulk
+                                                                                Employee
+                                                                                Template</span></a></li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

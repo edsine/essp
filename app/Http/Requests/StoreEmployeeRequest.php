@@ -41,7 +41,7 @@ class StoreEmployeeRequest extends FormRequest
             'identity_expiry_date' => 'date',
             'next_of_kin' => 'required|string',
             'next_of_kin_phone' => 'requried|string',
-            'monthly_remuneration' => 'required|numeric',
+            'monthly_renumeration' => 'required|numeric',
             'dependants_number' => 'required|numeric',
             'job_title' => 'required|string',
             'staff_id' => 'required|string',

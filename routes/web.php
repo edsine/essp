@@ -92,6 +92,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('claim/death', App\Http\Controllers\DeathClaimController::class);
     Route::resource('claim/disease', App\Http\Controllers\DiseaseClaimController::class);
 
+    Route::get('/death-claims/{id}', 'App\Http\Controllers\DeathClaimController@show')->name('death-claims.show');
+    Route::get('/accident-claims/{id}', 'App\Http\Controllers\AccidentClaimController@show')->name('accident-claims.show');
+    Route::get('/disease-claims/{id}', 'App\Http\Controllers\DiseaseClaimController@show')->name('disease-claims.show');
+
+
+
 });
 
 Route::get('/notification', function () {

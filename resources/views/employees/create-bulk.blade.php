@@ -56,8 +56,8 @@
                                 <div class="form-group">
                                     <label class="form-label" for="default-06">Select bulk
                                         Employee file (Excel only: .xls, .xlsx) <a
-                                            href="{{ Storage::url('employees.xlsx') }}">Download bulk Employee
-                                            template</a></label>
+                                        href="{{ url('employees.xlsx') }}" download>Download bulk Employee
+                                        template</a></label>
                                     <div class="form-control-wrap">
                                         <div class="form-file">
                                             <input type="file" multiple class="form-file-input" id="excel"
