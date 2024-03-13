@@ -39,7 +39,7 @@ class EmployeesImport implements ToModel, SkipsEmptyRows, WithHeadingRow
             'next_of_kin'    => $row['next_kin'],
             'next_of_kin_phone'    => $row['next_kin_number'],
             'dependants_number'    => $row['dependants_number'],
-            'monthly_remuneration'    => $row['monthly_remuneration'],
+            'monthly_renumeration'    => $row['monthly_renumeration'],
             //'job_title'    => $row[],
             //'password' => Hash::make($row[2]),
             'status' => 1,

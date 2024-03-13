@@ -55,8 +55,8 @@
                                 <td>{{ date('M d, Y', strtotime($claim->created_at)) }}</td>
                                 <td><span class="tb-status text-{{$claim->status ==0 ? 'warning' : 'success'}}">{{$claim->status ? 'APPROVED' : 'PENDING'}}</span></td>
                                 <td>
-                                    <a href="/approval/request/timeline"><span class="nk-menu-icon text-info"><em
-                                                class="icon ni ni-eye"></em></span></a>
+                                    <a href="{{ route('accident-claims.show', ['id' => $claim->id]) }}"><span class="nk-menu-icon text-info"><em
+                                        class="icon ni ni-eye"></em></span></a> 
                                 </td>
                             </tr>
                         @endforeach

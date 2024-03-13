@@ -241,9 +241,9 @@
                         <em class="icon ni ni-sign-kobo"></em>
                     </div>
                     <input type="number" class="form-control form-control-xl form-control-outlined"
-                        id="monthly_remuneration" name="monthly_remuneration" value="{{old('monthly_remuneration', $employee->monthly_remuneration ?? '')}}">
-                    <label class="form-label-outlined" for="monthly_remuneration">Monthly
-                        Remuneration</label>
+                        id="monthly_renumeration" name="monthly_renumeration" value="{{old('monthly_renumeration', $employee->monthly_renumeration ?? '')}}">
+                    <label class="form-label-outlined" for="monthly_renumeration">Monthly
+                        Renumeration</label>
                 </div>
             </div>
         </div>

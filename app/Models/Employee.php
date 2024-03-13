@@ -15,7 +15,7 @@ class Employee extends Model
         'gender', 'marital_status', 'email', 'employment_date', 'address',
         'state_of_origin', 'local_govt_area', 'phone_number', 'means_of_identification',
         'identity_number', 'identity_issue_date', 'identity_expiry_date',
-        'next_of_kin', 'next_of_kin_phone', 'monthly_remuneration', 'status',
+        'next_of_kin', 'next_of_kin_phone', 'monthly_renumeration', 'status',
         'dependants_number', 'job_title', 'staff_id', 'alternate_phone',
     ];
 

@@ -107,9 +107,11 @@ class AccidentClaimController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AccidentClaim $accidentClaim)
+    public function show($id)
     {
         //
+        $incident =  AccidentClaim::findOrFail($id);
+        return view('accident_claims.show', compact('incident'));
     }
 
     /**

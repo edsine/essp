@@ -103,9 +103,11 @@ class DiseaseClaimController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DiseaseClaim $diseaseClaim)
+    public function show($id)
     {
         //
+        $incident =  DiseaseClaim::findOrFail($id);
+        return view('disease_claims.show', compact('incident'));
     }
 
     /**

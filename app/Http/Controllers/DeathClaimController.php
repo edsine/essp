@@ -106,9 +106,11 @@ class DeathClaimController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DeathClaim $deathClaim)
+    public function show($id)
     {
         //
+        $incident =  DeathClaim::findOrFail($id);
+        return view('death_claims.show', compact('incident'));
     }
 
     /**
