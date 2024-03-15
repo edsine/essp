@@ -34,7 +34,7 @@
 
                                     @if ($pending && $pending->payment_status == 0)
                                         {{-- IF NO RRR IS GENERATED --}}
-                                        <div class="form-group mt-2">
+                                        {{-- <div class="form-group mt-2">
                                             <div class="row">
                                                 <div class="col-6 fw-bold">RRR:</div>
                                                 <div class="col-6">{{ $pending->rrr }}</div>
@@ -54,11 +54,11 @@
                                                         now!</button>
                                                 </form>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     @else
                                         {{-- WHEN RRR HAS BEEN GENERATED --}}
                                         <div class="form-group">
-                                            <form method="POST" action="{{ route('payment.remita') }}">
+                                            {{-- <form method="POST" action="{{ route('payment.remita') }}">
                                                 @csrf
                                                 <input type="hidden" name="payment_type" id="payment_type"
                                                     value="1">
@@ -66,7 +66,7 @@
                                                 <button type="submit" class="btn btn-secondary btn-lg mt-2"><em
                                                         class="icon ni ni-save me-2"></em> Generate Invoice (Remita
                                                     RR)</button>
-                                            </form>
+                                            </form> --}}
                                     @endif
                                 </div>
                             </div>
