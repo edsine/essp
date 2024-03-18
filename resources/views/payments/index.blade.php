@@ -53,21 +53,21 @@
                                         <div class="form-group w-100">
                                             @if (!$pending_payment || $paid_months != 0)
                                                 {{-- <div class="form-group"> --}}
-                                               {{--  <form method="POST" action="{{ route('payment.remita') }}">
+                                                <form method="POST" action="{{ route('payment.remita') }}">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <label for="year">Payment year:</label>
                                                             <select name="year" id="year" class="form-select">
                                                                 <option @selected(date('Y') == $start_year)>{{ $start_year }}
-                                                                </option> --}}
+                                                                </option>
                                                                 {{-- @if (date('Y') > $start_year)
                                                                     @for ($i = $start_year + 1; $i <= date('Y'); $i++)
                                                                         <option @selected(date('Y') == $i)>
                                                                             {{ $i }}</option>
                                                                     @endfor
                                                                 @endif --}}
-                                                           {{--  </select>
+                                                            </select>
 
                                                             <label for="contribution_period">Contribution Period:</label>
                                                             <select name="contribution_period" id="contribution_period"
@@ -113,10 +113,10 @@
                                                         </div>
                                                     </div>
 
-                                                </form> --}}
+                                                </form>
                                                 {{--  </div> --}}
                                             @elseif($pending_payment->payment_status == 0)
-                                                {{-- <div class="form-group mt-2">
+                                                <div class="form-group mt-2">
                                                     <div class="row">
                                                         <div class="col-6 fw-bold">RRR:</div>
                                                         <div class="col-6">{{ $pending_payment->rrr }}</div>
@@ -141,7 +141,7 @@
                                                                 now!</button>
                                                         </form>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                             @else
                                                 <div class="form-group">
                                                     <div class="row">
