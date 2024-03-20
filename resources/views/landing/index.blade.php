@@ -4,14 +4,22 @@
 @section('content')
 
 
+<style>
+  .custom-container {
+            max-width: 1400px; /* Adjust the value as per your requirement */
+        }
+ .navbar{
+    padding: 5px 0 0 0;
+ }
+</style>
 <header class="header-area">
     <div class="navbar-area">
-        <div class="container">
+        <div class="container custom-container">
             <div class="row">
                 <div class="col-lg-12" style="background-color: #ffffff;">
                     <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
                         <a class="navbar-brand" href="{{ url('/') }}" style="text-decoration: none;">
-                            <img style="height: 6vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
+                            <img style="height: 13vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
                             <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                         </a>
 
@@ -44,7 +52,7 @@
     </div> <!-- navbar area -->
 
     <div id="home" class="header-hero bg_cover d-lg-flex align-items-center">
-        <div class="container">
+        <div class="container custom-container">
             <div class="row align-items-center justify-content-center justify-content-lg-between">
                 <div class="col-lg-6 col-md-10">
                     <div class="header-hero-content">
@@ -204,7 +212,7 @@
                     <p class="text">Experience the transformational power of ESSP, backed by the unwavering support of Servicom, our specialized department within NSITF. We understand that your needs don't adhere to a 9-to-5 schedule, which is why we offer round-the-clock assistance to ensure your journey is always smooth, your feedback continues to play a vital role in the evolution of our platform.
                     </p>
                     <ul>
-                        <a href="http://servicomnsitf.gov.ng" rel="nofollow" class="main-btn">Explore 24/7 Support</a>
+                        <a href="http://servicom.nsitf.gov.ng" rel="nofollow" class="main-btn">Explore 24/7 Support</a>
                     </ul>
                 </div> <!-- download image -->
             </div>

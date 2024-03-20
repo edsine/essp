@@ -108,9 +108,9 @@
                                     <h4 class="title">Support</h4>
                                 </div>
                                 <ul class="link">
-                                    <li><a class="" href="#">FAQ on Servicomm</a></li>
-                                    <li><a class="" href="#">Privacy Policy</a></li>
-                                    <li><a class="" href="#">Terms Of Use</a></li>
+                                    <li><a class="" href="https://servicom.nsitf.gov.ng/faqs">FAQ on Servicomm</a></li>
+                                    <li><a class="" href="https://nsitf.gov.ng/privacy-policy">Privacy Policy</a></li>
+                                    <li><a class="" href="https://nsitf.gov.ng/terms">Terms Of Use</a></li>
 
                                 </ul>
                             </div> <!-- footer link wrapper -->
