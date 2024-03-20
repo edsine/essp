@@ -1,13 +1,20 @@
 @extends('layouts.landing')
-
+<style>
+    .custom-container {
+              max-width: 1400px; /* Adjust the value as per your requirement */
+          }
+   .navbar{
+      padding: 5px 0 0 0;
+   }
+  </style>
 <header class="header-area">
     <div class="navbar-area">
-        <div class="container">
+        <div class="container custom-container">
             <div class="row">
                 <div class="col-lg-12" style="background-color: #ffffff;">
                     <nav class="navbar navbar-expand-lg" style="background-color: #ffffff;">
                         <a class="navbar-brand" href="{{ url('/') }}" style="text-decoration: none;">
-                            <img style="height: 6vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
+                            <img style="height: 13vh;" src="{{ asset('assets/assets/images/NSITF-logo.png') }}" alt="">
                             <!-- <b style="font-size: 30px; color: #02a14d; font-family:verdana;">Employer Self Service Portal</b> -->
                         </a>
 
@@ -46,7 +53,7 @@
 @section('content')
 <section id="why" class="services-area1 pt-110 pb-120" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
    <div class="row">
-  <div class="col-md-12" style="margin-top: 30px;">
+  <div class="col-md-12" style="margin-top: 60px;">
     @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -59,7 +66,7 @@
     @endif
     <form style="" action="{{ route('certificate.verify') }}" method="get" style="text-align: center;">
         <label for="ecs_number">Enter ECS Number:</label>
-        <input class="form-control" type="text"  name="ecs_number" id="ecs_number" required>
+        <input class="form-control" type="text"  name="ecs_number" id="ecs_number" placeholder="ECS Number" required>
         <button type="submit" class="main-btn" style="margin-top: 10px;">Verify</button>
     </form>
   </div>
