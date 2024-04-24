@@ -34,7 +34,7 @@
 
                                     @if ($pending && $pending->payment_status == 0)
                                         {{-- IF NO RRR IS GENERATED --}}
-                                        {{-- <div class="form-group mt-2">
+                                         <div class="form-group mt-2">
                                             <div class="row">
                                                 <div class="col-6 fw-bold">RRR:</div>
                                                 <div class="col-6">{{ $pending->rrr }}</div>
@@ -54,7 +54,7 @@
                                                         now!</button>
                                                 </form>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     @else
                                         {{-- WHEN RRR HAS BEEN GENERATED --}}
                                         <div class="form-group">
