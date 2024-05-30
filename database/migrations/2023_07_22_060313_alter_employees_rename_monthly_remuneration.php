@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->renameColumn('monthly_remuneration', 'monthly_renumeration');
+            $table->renameColumn('monthly_renumeration', 'monthly_remuneration');
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      */
     public function down(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->renameColumn('monthly_remuneration', 'monthly_renumeration');
+            $table->renameColumn('monthly_renumeration', 'monthly_remuneration');
         });
     }
 };
