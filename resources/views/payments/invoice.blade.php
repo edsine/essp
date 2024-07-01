@@ -72,8 +72,8 @@
                         <div class="invoice-contact-info">
                             <h4 class="title">{{ $payment->employer->company_name }}</h4>
                             <ul class="list-plain">
-                                <li><em class="icon ni ni-map-pin-fill fs-18px"></em><span>{{ $payment->employer->company_address }}<br>{{ $payment->employer->lga->name }},
-                                        {{ $payment->employer->state->name }}</span></li>
+                                <li><em class="icon ni ni-map-pin-fill fs-18px"></em><span>{{ $payment->employer->company_address }}<br>{{ $payment->employer->lga ? $payment->employer->lga->name : 'NILL' }},
+                                        {{ $payment->employer->state ? $payment->employer->state->name : 'NILL' }}</span></li>
                                 <li><em
                                         class="icon ni ni-call-fill fs-14px"></em><span>{{ $payment->employer->company_phone }}</span>
                                 </li>
