@@ -37,7 +37,9 @@ class DeathClaimController extends Controller
     public function store(StoreDeathClaimRequest $request)
     {
         $validated = $request->validated();
+        if (request()->hasFile('document') && request()->file('document')->isValid()) {
         $validated['document'] = request()->file('document')->store('claims_documents', 'public');
+        }
         $validated['branch_id'] = auth()->user()->branch->id;
 
         $deathClaim = auth()->user()->death_claims()->create($validated);

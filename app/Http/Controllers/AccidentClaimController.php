@@ -37,7 +37,9 @@ class AccidentClaimController extends Controller
     public function store(StoreAccidentClaimRequest $request)
     {
         $validated = $request->validated();
+        if (request()->hasFile('document') && request()->file('document')->isValid()) {
         $validated['document'] = request()->file('document')->store('claims_documents', 'public');
+        }
         $validated['branch_id'] = auth()->user()->branch->id;
 
         $accidentClaim = auth()->user()->accident_claims()->create($validated);

@@ -37,7 +37,9 @@ class DiseaseClaimController extends Controller
     public function store(StoreDiseaseClaimRequest $request)
     {
         $validated = $request->validated();
+        if (request()->hasFile('document') && request()->file('document')->isValid()) {
         $validated['document'] = request()->file('document')->store('claims_documents', 'public');
+        }
         $validated['branch_id'] = auth()->user()->branch->id;
 
         $diseaseClaim = auth()->user()->disease_claims()->create($validated);

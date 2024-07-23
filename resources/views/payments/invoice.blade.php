@@ -144,7 +144,7 @@
     </div><!-- .invoice -->
 </div><!-- .nk-block -->
 <div class="nk-block-content text-center" style="position: fixed; bottom: 0;left:0;right:0;">
-    <p class="text-soft">&copy; 2023 {{ env('APP_NAME') }}. All Rights Reserved.</p>
+    <p class="text-soft">&copy; <?php date('Y') ?> ESSP. All Rights Reserved.</p>
 </div>
 <script>
     function printPromot() {
